@@ -15,8 +15,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
+
+
+//        
+//        var navController : UINavigationController = self.window?.rootViewController as UINavigationController
+//        
+//        navController.navigationBarClas
+        
+        
+        
+        
+        //UIApplication.sharedApplication().statusBarStyle = .LightContent
+
+//        FLEXManager.sharedManager().showExplorer()
+
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()];
+////
+        UINavigationBar.appearance().barTintColor = UIColor.paperColorGray900()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+//
+       UIApplication.sharedApplication().statusBarStyle = .LightContent
+////
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+//        // Override point for customization after application launch.
+
+
         return true
     }
 
@@ -49,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "evl.ltg.ios_mt_poster" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count - 1] as NSURL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -78,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
         }
-        
+
         return coordinator
     }()
 
@@ -95,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
-    func saveContext () {
+    func saveContext() {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
             if moc.hasChanges && !moc.save(&error) {
