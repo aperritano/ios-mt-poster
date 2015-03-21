@@ -21,13 +21,13 @@ class ViewController: UIViewController {
         dynamicView.layer.borderWidth = 2
         self.mainView.addSubview(dynamicView)
 
+//
+//        var styleView = BallUIView(frame: CGRectMake(100, 100, 125, 125))
+//        styleView.baseColor = UIColor.paperColorGreenA100()
 
-        var styleView = BallUIView(frame: CGRectMake(100, 100, 125, 125))
-        styleView.baseColor = UIColor.paperColorGreenA100()
 
-
-        self.mainView.addSubview(styleView)
-        styleView.setNeedsLayout()
+//        self.mainView.addSubview(styleView)
+//        styleView.setNeedsLayout()
     }
 
     override func didReceiveMemoryWarning() {

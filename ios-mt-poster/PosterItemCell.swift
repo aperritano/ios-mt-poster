@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BFPaperCollectionViewCell
 
 class PosterItemCell :  BFPaperCollectionViewCell {
     

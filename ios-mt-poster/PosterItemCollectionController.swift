@@ -7,13 +7,13 @@
 //
 
 import Foundation
-
-
-import Foundation
+import UIKit
+import CCMPopup
 
 class PosterItemCollectionController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var posterItems: [PosterItem] = [PosterItem]()
+    var selectedPosterId : String?
 
     @IBOutlet var collectionView: UICollectionView!
     
@@ -26,7 +26,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        posterItems = DBHelper.sharedMonitor().fetchPosterItemsWithPoster(selectedPosterId!);
         
         UINavigationBar.appearance().barTintColor = selectedColor
     }
@@ -42,13 +42,13 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
                 var cell = collectionView.cellForItemAtIndexPath(indexPath)
-                cell?.contentView.backgroundColor = UIColor.paperColorGray900()
+                cell?.contentView.backgroundColor = UIColor.paperColorOrange400()
 
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         var cell = collectionView.cellForItemAtIndexPath(indexPath)
-        cell?.contentView.backgroundColor = UIColor.paperColorYellow400()
+        cell?.contentView.backgroundColor = UIColor.paperColorBlue400()
     }
     
     func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -64,17 +64,6 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
         //
     }
     
-//    override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-//        var cell = collectionView.cellForItemAtIndexPath(indexPath)
-//        cell?.contentView.backgroundColor = UIColor.paperColorGray900()
-//    }
-//    
-//    
-//    
-//    override func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-//        var cell = collectionView.cellForItemAtIndexPath(indexPath)
-//        cell?.contentView.backgroundColor = nil
-//    }
     
     var popupController: AddPosterItemController?
     
@@ -101,7 +90,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
             popupSegue.backgroundViewAlpha = 0.9
             popupSegue.backgroundViewColor = UIColor.paperColorGray400()
             popupSegue.dismissableByTouchingBackground = true
-            self.popupController = popupSegue.destinationViewController as AddPosterItemController
+            self.popupController = popupSegue.destinationViewController as? AddPosterItemController
 
         
     }

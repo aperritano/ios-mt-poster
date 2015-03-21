@@ -7,70 +7,106 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class User {
+class User : Mappable {
 
     var id: String?
+    var uid: String?
     var name: String?
-    var posters: [Poster] = [Poster]()
+    var posters: [String]?
+    var nameTags: [String]?
+ 
     
-    init(id: String!, name: String!) {
-        self.id = id
-        self.name = name
+    init() {}
+    
+    required init?(_ map: Map) {
+        mapping(map)
     }
-
-    func addPoster(poster: Poster?) {
-        posters.append(poster!)
+    
+    
+    let transform = TransformOf<String, AnyObject>(fromJSON: { (value: AnyObject?) -> String? in
+        // transform value from String? to Int?
+        
+        if value? != nil {
+            var newval = value? as NSDictionary
+            return newval["$oid"] as String
+        }
+        
+        
+        return ""
+        }, toJSON: { (value: String?) -> AnyObject? in
+            // transform value from Int? to String?
+            if let value = value {
+                return String(value)
+            }
+            return nil
+    })
+    
+    // Mappable
+    func mapping(map: Map) {
+        id      <- (map["_id"], transform)
+        uid      <- map["id"]
+        name    <- map["name"]
+        posters <- map["posters"]
+        nameTags <- map["nameTags"]
     }
-
-    func toString() -> String {
-        return "User with id: \(id) name: \(name)"
-    }
+    
+   
 }
 
-class Poster {
+class Poster : Mappable {
     var id: String?
     var height: Int?
     var width: Int?
-    var posterItems: [PosterItem] = [PosterItem]()
+    var posterItems: [String]?
     var name: String?
 
-    init(id: String, height: Int, width: Int, name: String) {
-        self.id = id
-        self.height = height
-        self.width = width
-        self.name = name
+    init() {}
+    
+    required init?(_ map: Map) {
+        mapping(map)
     }
-
-    func addPosterItem(posterItem: PosterItem) {
-        posterItems.append(posterItem)
+    
+    // Mappable
+    func mapping(map: Map) {
+        id          <- map["id"]
+        name        <- map["name"]
+        height      <- map["height"]
+        width       <- map["width"]
+        posterItems <- map["posterItems"]
     }
-
 }
 
 
-class PosterItem {
+class PosterItem : Mappable {
     var id: String?
     var x: Int?
     var y: Int?
     var width: Int?
     var height: Int?
     var name: String?
+    var rotation: Int?
     var image_id: String?
     var image_bytes: String?
     
-    init() {
-        
+    init() {}
+    
+    required init?(_ map: Map) {
+        mapping(map)
     }
     
-    init(id: String, x: Int, y: Int, width: Int, height: Int, name: String, image_id: String, image_bytes: String) {
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.name = name
-        self.image_id = image_id
-        self.image_bytes = image_bytes
+    // Mappable
+    func mapping(map: Map) {
+        id          <- map["id"]
+        name        <- map["name"]
+        x           <- map["x"]
+        y           <- map["y"]
+        height      <- map["height"]
+        width       <- map["width"]
+        rotation    <- map["rotation"]
+        image_id    <- map["imageId"]
+        image_bytes <- map["imageBytes"]
     }
-    
+ 
 }

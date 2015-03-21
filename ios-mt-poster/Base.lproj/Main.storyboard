@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5cr-I4-VXH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5cr-I4-VXH">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="IPt-qO-fGI" kind="relationship" relationship="rootViewController" id="izI-Qa-fke"/>
+                        <segue destination="cFC-lS-XlA" kind="relationship" relationship="rootViewController" id="7tf-zk-epl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AY8-EW-okB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -43,126 +43,240 @@
             </objects>
             <point key="canvasLocation" x="-1973.76" y="1181.4400000000001"/>
         </scene>
-        <!--Users-->
-        <scene sceneID="ALM-se-1Ye">
+        <!--Users Collection-->
+        <scene sceneID="eeR-2O-c9l">
             <objects>
-                <collectionViewController title="Users" id="IPt-qO-fGI" customClass="UserCollectionViewController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Kav-GD-4ld">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                <viewController title="Users Collection " definesPresentationContext="YES" id="cFC-lS-XlA" userLabel="Users Collection" customClass="UserCollectionViewController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eb7-9r-vy5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ez8-gD-Xnv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tzM-1F-jbZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="qTl-XU-6xY">
-                            <size key="itemSize" width="334" height="239"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="JYF-J7-J8L" customClass="UserCell" customModule="ios_mt_poster" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYP-63-4nK">
-                                            <rect key="frame" x="0.0" y="91" width="334" height="46"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EPB-db-KPB">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="660"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="37z-ld-B9W">
+                                    <size key="itemSize" width="334" height="239"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="JYF-J7-J8L" customClass="UserCell" customModule="ios_mt_poster" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYP-63-4nK">
+                                                    <rect key="frame" x="0.0" y="91" width="334" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcW-ea-ugX">
+                                                    <rect key="frame" x="0.0" y="151" width="334" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ben's Class" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fL-QF-g52">
+                                                    <rect key="frame" x="0.0" y="185" width="334" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlk-za-Hn3" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                                    <rect key="frame" x="44" y="16" width="246" height="66"/>
+                                                    <color key="backgroundColor" red="0.77254901960784317" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="REMOVE">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="ripplePercent">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="DeleteCellAction:" destination="cFC-lS-XlA" eventType="touchUpInside" id="MsS-pv-ef4"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="classLabel" destination="0fL-QF-g52" id="4dv-tb-xzA"/>
+                                            <outlet property="nameTags" destination="hcW-ea-ugX" id="HYP-MP-qbz"/>
+                                            <outlet property="removeButton" destination="Xlk-za-Hn3" id="Xnk-2f-6cS"/>
+                                            <outlet property="title" destination="kYP-63-4nK" id="TtC-0c-tXA"/>
+                                            <segue destination="BKN-co-WQw" kind="push" identifier="posterSegue" id="PgW-yt-fCt"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outlet property="title" destination="kYP-63-4nK" id="TtC-0c-tXA"/>
-                                    <segue destination="bgU-NK-Wyb" kind="push" identifier="posterSegue" id="fjB-v6-zIU"/>
+                                    <outlet property="dataSource" destination="cFC-lS-XlA" id="ZZb-Zt-f9w"/>
+                                    <outlet property="delegate" destination="cFC-lS-XlA" id="FF7-9D-qmj"/>
                                 </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="IPt-qO-fGI" id="p5o-2X-i40"/>
-                            <outlet property="delegate" destination="IPt-qO-fGI" id="ci9-Bh-wPt"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Users" id="7Qh-Zh-gPY">
-                        <barButtonItem key="rightBarButtonItem" image="burger.png" id="QAL-US-lx0">
+                            </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cel-vm-h2E">
+                                <rect key="frame" x="0.0" y="660" width="1024" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Y8T-UG-zz2"/>
+                                    <barButtonItem systemItem="trash" id="j68-Iy-hFY">
+                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="toggleEditMode:" destination="cFC-lS-XlA" id="Ujw-Yg-HVg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="GJH-rC-eQR"/>
+                                    <barButtonItem systemItem="add" id="YKW-e4-5tW">
+                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="addUserAction:" destination="cFC-lS-XlA" id="jkt-3c-xit"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="User Items" id="WGd-yp-V09">
+                        <barButtonItem key="rightBarButtonItem" image="burger.png" id="fha-GF-1k4">
                             <connections>
-                                <action selector="onBurger" destination="IPt-qO-fGI" id="wHQ-u6-lz9"/>
+                                <action selector="onBurger" destination="cFC-lS-XlA" id="FSY-jq-mU6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WUX-oE-B7Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="collectionView" destination="EPB-db-KPB" id="Wun-cl-4Q4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qkO-NJ-ug5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="581.75999999999999" y="835.84000000000003"/>
+            <point key="canvasLocation" x="1162" y="1477"/>
         </scene>
-        <!--Posters-->
-        <scene sceneID="hGF-LW-YTO">
+        <!--Poster Collection-->
+        <scene sceneID="LiV-Vx-cOB">
             <objects>
-                <collectionViewController title="Posters" id="bgU-NK-Wyb" customClass="PosterCollectionController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="PJw-Hm-qDE">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                <viewController storyboardIdentifier="Poster Collection" title="Poster Collection" definesPresentationContext="YES" id="BKN-co-WQw" customClass="PosterCollectionController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="beC-xb-seT"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fog-zJ-blK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TgB-93-j7I">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="OAb-BA-qhV">
-                            <size key="itemSize" width="334" height="239"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="ioI-zg-aCv" customClass="UserCell" customModule="ios_mt_poster" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQU-Oy-lut">
-                                            <rect key="frame" x="0.0" y="91" width="334" height="46"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GkA-Y4-DMh">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="660"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="m4f-rH-GXp">
+                                    <size key="itemSize" width="334" height="239"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="eQg-85-gQi" customClass="UserCell" customModule="ios_mt_poster" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGa-YE-oSh">
+                                                    <rect key="frame" x="0.0" y="91" width="334" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AwQ-bL-nnA">
+                                                    <rect key="frame" x="0.0" y="179" width="334" height="46"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="nameTags" destination="AwQ-bL-nnA" id="p9b-48-e3D"/>
+                                            <outlet property="title" destination="HGa-YE-oSh" id="1nJ-gT-dlZ"/>
+                                            <segue destination="93P-Nc-6tW" kind="push" identifier="posterItemSegue" id="D5V-5q-TVf"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outlet property="title" destination="RQU-Oy-lut" id="iNi-ge-Nw2"/>
-                                    <segue destination="93P-Nc-6tW" kind="push" identifier="posterItemSegue" id="vkW-2J-S7Z"/>
+                                    <outlet property="dataSource" destination="BKN-co-WQw" id="s4s-WI-3aR"/>
+                                    <outlet property="delegate" destination="BKN-co-WQw" id="BhZ-Sp-17N"/>
                                 </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="bgU-NK-Wyb" id="pnr-do-Dkc"/>
-                            <outlet property="delegate" destination="bgU-NK-Wyb" id="5y4-Gi-X1a"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Posters" id="HSU-yq-Qdr">
-                        <barButtonItem key="rightBarButtonItem" image="burger.png" id="jtc-oD-SD9">
+                            </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mAd-O3-8yv">
+                                <rect key="frame" x="0.0" y="660" width="1024" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jbN-BS-5jQ"/>
+                                    <barButtonItem systemItem="trash" id="f78-i8-kDn">
+                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="deleteAction:" destination="BKN-co-WQw" id="RpJ-pe-saW"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="cpg-cB-Jm4"/>
+                                    <barButtonItem systemItem="add" id="tZE-Xj-ETN">
+                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="editAction:" destination="BKN-co-WQw" id="1XB-88-maJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Posters" id="xgM-Hq-pyI">
+                        <barButtonItem key="rightBarButtonItem" image="burger.png" id="aiw-WY-qDD">
                             <connections>
-                                <action selector="onBurger" destination="bgU-NK-Wyb" id="ffE-Ff-XO2"/>
+                                <action selector="onBurger" destination="BKN-co-WQw" id="Xds-TJ-njF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1UF-1x-sgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="collectionView" destination="GkA-Y4-DMh" id="ZWU-dc-PzT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KCk-13-lyL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1401.6000000000001" y="926.72000000000003"/>
+            <point key="canvasLocation" x="1254" y="2432"/>
         </scene>
-        <!--PosterItem -->
+        <!--PosterItem Collection-->
         <scene sceneID="EBc-J7-cHO">
             <objects>
-                <viewController title="PosterItem " definesPresentationContext="YES" id="93P-Nc-6tW" customClass="PosterItemCollectionController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="PosterItem Collection" definesPresentationContext="YES" id="93P-Nc-6tW" customClass="PosterItemCollectionController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9LT-k8-fiO"/>
                         <viewControllerLayoutGuide type="bottom" id="4XC-wV-Qia"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="w6a-LE-kP4">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NdD-L5-lfK">
@@ -237,13 +351,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="collectionView" destination="NdD-L5-lfK" id="97f-Z0-QIE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0r-es-a4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2032" y="2068"/>
+            <point key="canvasLocation" x="2396" y="2079"/>
         </scene>
         <!--AddPosterViewController-->
         <scene sceneID="jst-xw-5OE">
@@ -330,7 +445,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1982" y="2935"/>
+            <point key="canvasLocation" x="2593" y="3177"/>
         </scene>
     </scenes>
     <resources>

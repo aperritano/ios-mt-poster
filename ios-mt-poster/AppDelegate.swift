@@ -28,11 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //UIApplication.sharedApplication().statusBarStyle = .LightContent
 
-//        FLEXManager.sharedManager().showExplorer()
+       //FLEXManager.sharedManager().showExplorer()
 
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()];
 ////
-        UINavigationBar.appearance().barTintColor = UIColor.paperColorGray900()
+        UINavigationBar.appearance().barTintColor = UIColor.paperColorGray600()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
 //
        UIApplication.sharedApplication().statusBarStyle = .LightContent
