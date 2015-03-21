@@ -89,11 +89,9 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
     @IBAction func DeleteCellAction(sender: MKButton) {
 
         SweetAlert().showAlert("Are you sure?", subTitle: "This user and all of its posters will be permanently delete!", style: AlertStyle.Warning, buttonTitle:"Cancel", buttonColor:UIColor.paperColorBlue400() , otherButtonTitle:  "Yes, delete it!", otherButtonColor: UIColor.paperColorRed()) { (isOtherButton) -> Void in
-            if isOtherButton == true {
-                
+            if isOtherButton == true {                
                 println("Cancel Button  Pressed")
-            }
-            else {
+            } else {
                 
                 self.collectionView.performBatchUpdates({
                     DBHelper.sharedMonitor().deleteUser(sender.tag)
