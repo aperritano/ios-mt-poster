@@ -147,6 +147,7 @@
                                         <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="addUserAction:" destination="cFC-lS-XlA" id="jkt-3c-xit"/>
+                                            <segue destination="F3T-DW-BEc" kind="custom" identifier="addUserSegue" customClass="CCMPopupSegue" id="5mt-XA-wgS"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -165,6 +166,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="collectionView" destination="EPB-db-KPB" id="Wun-cl-4Q4"/>
+                        <outlet property="editButton" destination="j68-Iy-hFY" id="7vN-Bp-jLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkO-NJ-ug5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -212,12 +214,37 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVk-UL-1Ki" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                                    <rect key="frame" x="44" y="14" width="246" height="66"/>
+                                                    <color key="backgroundColor" red="0.7725490196" green="0.0" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="REMOVE">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="ripplePercent">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="DeleteCellAction:" destination="BKN-co-WQw" eventType="touchUpInside" id="Yuq-ss-M97"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="nameTags" destination="AwQ-bL-nnA" id="p9b-48-e3D"/>
+                                            <outlet property="removeButton" destination="UVk-UL-1Ki" id="HDL-Mj-ObT"/>
                                             <outlet property="title" destination="HGa-YE-oSh" id="1nJ-gT-dlZ"/>
                                             <segue destination="93P-Nc-6tW" kind="push" identifier="posterItemSegue" id="D5V-5q-TVf"/>
                                         </connections>
@@ -235,7 +262,7 @@
                                     <barButtonItem systemItem="trash" id="f78-i8-kDn">
                                         <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <action selector="deleteAction:" destination="BKN-co-WQw" id="RpJ-pe-saW"/>
+                                            <action selector="toggleEditMode:" destination="BKN-co-WQw" id="XDv-Fj-gey"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="cpg-cB-Jm4"/>
@@ -243,6 +270,7 @@
                                         <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="editAction:" destination="BKN-co-WQw" id="1XB-88-maJ"/>
+                                            <segue destination="INj-mC-MJb" kind="custom" identifier="addPosterSegue" customClass="CCMPopupSegue" id="Vpo-h6-xj8"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -261,11 +289,176 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="collectionView" destination="GkA-Y4-DMh" id="ZWU-dc-PzT"/>
+                        <outlet property="editButton" destination="f78-i8-kDn" id="0hM-cn-prl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KCk-13-lyL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1254" y="2432"/>
+            <point key="canvasLocation" x="1394" y="2628"/>
+        </scene>
+        <!--Add User Controller-->
+        <scene sceneID="5Sg-Yi-SXU">
+            <objects>
+                <viewController id="F3T-DW-BEc" customClass="AddUserController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Nu-Th-Ye7"/>
+                        <viewControllerLayoutGuide type="bottom" id="opW-1b-Vyd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TCP-gZ-MfG">
+                        <rect key="frame" x="0.0" y="0.0" width="650" height="350"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Y0-Yi-zDO" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                <rect key="frame" x="202" y="257" width="246" height="66"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Add User">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Ii9-8j-a5t" kind="unwind" unwindAction="popoverAddButton:" id="DUa-FN-cy1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ar7-CO-QbH" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                <rect key="frame" x="592" y="8" width="50" height="45"/>
+                                <state key="normal" title="Button" image="icon2.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Ii9-8j-a5t" kind="unwind" unwindAction="popoverCancelButton:" id="ecK-3f-til"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(e.g. SUPERNOVAS, john, etc.)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kch-jt-X98">
+                                <rect key="frame" x="181" y="81" width="399" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(e.g, john, dave, brian, etc.)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dhI-4l-LgC">
+                                <rect key="frame" x="181" y="130" width="399" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(e.g., I HEART GAMMA RAYS)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uEV-du-ebs">
+                                <rect key="frame" x="181" y="178" width="399" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IK7-6w-dFc">
+                                <rect key="frame" x="71" y="85" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NameTags:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8j-8p-vKE">
+                                <rect key="frame" x="71" y="133" width="86" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Poster Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wv3-7u-H1K">
+                                <rect key="frame" x="71" y="181" width="92" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="650" height="350"/>
+                    <connections>
+                        <outlet property="addMaterialButton" destination="2Y0-Yi-zDO" id="itg-t9-GVh"/>
+                        <outlet property="nameTagTextField" destination="dhI-4l-LgC" id="ccN-hO-u3q"/>
+                        <outlet property="posterNameTextField" destination="uEV-du-ebs" id="voh-CN-MUc"/>
+                        <outlet property="userNameTextField" destination="kch-jt-X98" id="QVy-Zc-GNT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QRY-CY-fqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ii9-8j-a5t" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="915" y="3543"/>
+        </scene>
+        <!--Add Poster Controller-->
+        <scene sceneID="FC5-cM-gO7">
+            <objects>
+                <viewController id="INj-mC-MJb" customClass="AddPosterController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2fc-rB-Gyg"/>
+                        <viewControllerLayoutGuide type="bottom" id="DII-KL-hO2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5rt-2s-aRu">
+                        <rect key="frame" x="0.0" y="0.0" width="650" height="250"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(e.g., GAMMA RAYS AS NRG)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oe4-Ut-NCU">
+                                <rect key="frame" x="159" y="88" width="365" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jw-ac-che" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                <rect key="frame" x="591" y="8" width="50" height="45"/>
+                                <state key="normal" title="Button" image="icon2.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="SNj-RP-Viq" kind="unwind" unwindAction="popoverCancelButton:" id="soL-5A-DMc"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Poster Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT2-K3-b4H">
+                                <rect key="frame" x="59" y="91" width="92" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCn-gV-hdx" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                <rect key="frame" x="202" y="150" width="246" height="66"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Add Poster">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="SNj-RP-Viq" kind="unwind" unwindAction="popoverAddButton:" id="3Np-bp-wKP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yW2-aO-Kjs"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="650" height="250"/>
+                    <connections>
+                        <outlet property="posterNameTextField" destination="Oe4-Ut-NCU" id="JEk-il-MAC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T5D-ye-fv0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SNj-RP-Viq" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1709" y="3379"/>
         </scene>
         <!--PosterItem Collection-->
         <scene sceneID="EBc-J7-cHO">
@@ -296,22 +489,54 @@
                                             <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce8-SQ-z2S">
-                                                    <rect key="frame" x="0.0" y="184" width="334" height="55"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SDj-0V-Mo3">
+                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce8-SQ-z2S" userLabel="contentLabel">
+                                                    <rect key="frame" x="8" y="198" width="334" height="33"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SDj-0V-Mo3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="185"/>
-                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diY-tG-t9w" userLabel="titleLabel">
+                                                    <rect key="frame" x="8" y="170" width="334" height="33"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfb-mL-Jl0" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                                    <rect key="frame" x="44" y="23" width="246" height="66"/>
+                                                    <color key="backgroundColor" red="0.7725490196" green="0.0" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="REMOVE">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="ripplePercent">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="DeleteCellAction:" destination="93P-Nc-6tW" eventType="touchUpInside" id="W72-3n-QBV"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="contentLabel" destination="Ce8-SQ-z2S" id="oBa-cU-tpb"/>
                                             <outlet property="posterImage" destination="SDj-0V-Mo3" id="edX-Rh-CJC"/>
-                                            <outlet property="title" destination="Ce8-SQ-z2S" id="IUM-fK-shT"/>
+                                            <outlet property="removeButton" destination="Xfb-mL-Jl0" id="yv2-2G-taD"/>
+                                            <outlet property="title" destination="diY-tG-t9w" id="AKN-Kn-rLi"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -327,15 +552,14 @@
                                     <barButtonItem systemItem="trash" id="oCd-fW-Fqh">
                                         <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <action selector="deleteAction:" destination="93P-Nc-6tW" id="afx-f7-26T"/>
+                                            <action selector="toggleEditMode:" destination="93P-Nc-6tW" id="zLT-ev-ZdL"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="hpA-2F-3a1"/>
                                     <barButtonItem systemItem="add" id="oQD-DW-mTD">
                                         <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <action selector="editAction:" destination="93P-Nc-6tW" id="PgP-m0-P5V"/>
-                                            <segue destination="yfH-Ed-Mlg" kind="custom" identifier="addPosterItemSegue" customClass="CCMPopupSegue" id="UzJ-ja-lkh"/>
+                                            <segue destination="yfH-Ed-Mlg" kind="custom" identifier="addPosterItemSegue" customClass="CCMPopupSegue" id="JOW-wq-4dD"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -354,6 +578,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="collectionView" destination="NdD-L5-lfK" id="97f-Z0-QIE"/>
+                        <outlet property="editButton" destination="oCd-fW-Fqh" id="ztk-FX-xqB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0r-es-a4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -369,11 +594,11 @@
                         <viewControllerLayoutGuide type="bottom" id="byd-2k-tjo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NeE-WI-jmH">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="700"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kfj-ih-GuQ">
-                                <rect key="frame" x="80" y="42" width="640" height="480"/>
+                                <rect key="frame" x="80" y="148" width="640" height="480"/>
                                 <color key="backgroundColor" red="0.043140001599999998" green="0.14117999370000001" blue="0.98430997129999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -381,7 +606,7 @@
                                 </connections>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CAPTION" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOW-xp-j0Q">
-                                <rect key="frame" x="80" y="530" width="640" height="30"/>
+                                <rect key="frame" x="80" y="673" width="640" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -391,12 +616,44 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(e.g., GAMMA VIZ)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oql-uq-nRa">
+                                <rect key="frame" x="80" y="74" width="640" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-hx-dQa" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                <rect key="frame" x="739" y="8" width="50" height="45"/>
+                                <state key="normal" title="Button" image="icon2.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="tFf-Q9-Z5f" kind="unwind" unwindAction="popoverCancelButton:" id="lng-Na-GgZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LM3-HO-XEc">
+                                <rect key="frame" x="80" y="45" width="37" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Image:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hmp-F7-YYb">
+                                <rect key="frame" x="80" y="119" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Caption:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5J-qe-EZH">
+                                <rect key="frame" x="80" y="644" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-cd-BkV" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
-                                <rect key="frame" x="277" y="596" width="246" height="66"/>
+                                <rect key="frame" x="238" y="744" width="275" height="66"/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Add Image">
+                                <state key="normal" title="Add Poster Items">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -409,17 +666,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="addPosterItemAction:" destination="yfH-Ed-Mlg" eventType="touchUpInside" id="sYW-je-rSI"/>
-                                    <segue destination="tFf-Q9-Z5f" kind="unwind" unwindAction="popoverAddButton:" id="Fdk-2Q-GAB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-hx-dQa" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
-                                <rect key="frame" x="739" y="8" width="50" height="45"/>
-                                <state key="normal" title="Button" image="icon2.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="tFf-Q9-Z5f" kind="unwind" unwindAction="popoverCancelButton:" id="ksw-Dw-fTQ"/>
+                                    <segue destination="tFf-Q9-Z5f" kind="unwind" unwindAction="popoverAddButton:" id="9mi-SS-TPf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -430,11 +677,11 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="800" height="700"/>
+                    <size key="freeformSize" width="800" height="850"/>
                     <connections>
-                        <outlet property="messageTextField" destination="iOW-xp-j0Q" id="yXF-pn-L0C"/>
-                        <outlet property="posterImageView" destination="kfj-ih-GuQ" id="7oQ-Jo-11c"/>
-                        <outlet property="sendMaterialButton" destination="TbD-cd-BkV" id="qjb-sl-pHv"/>
+                        <outlet property="captionTextField" destination="iOW-xp-j0Q" id="HvW-3U-aH6"/>
+                        <outlet property="posterImageView" destination="kfj-ih-GuQ" id="nfE-VY-u0k"/>
+                        <outlet property="titleField" destination="oql-uq-nRa" id="WNE-sC-8Gb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aL4-ic-TGh" userLabel="First Responder" sceneMemberID="firstResponder"/>

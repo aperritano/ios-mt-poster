@@ -9,15 +9,15 @@
 
 import Foundation
 import UIKit
-
+import MQTTKit
 
 let _mqttSharedInstance = MQTTPipe()
 
 class MQTTPipe {
     
-    let kMQTTServerHost = "q.m2m.io"
-    let kInitTopic = "init-topic"
-    var topics = ["public/default"]
+    let kMQTTServerHost = "iot.eclipse.org"
+    let kInitTopic = "IAMPOSTER"
+    var topics = ["IAMPOSTER"]
     var mqttInstance: MQTTClient
     
     class var sharedInstance : MQTTPipe {
@@ -31,14 +31,14 @@ class MQTTPipe {
         
         mqttInstance.connectToHost(kMQTTServerHost, completionHandler: { (code: MQTTConnectionReturnCode) -> Void in
             
-//            if code.ConnectionAccepted == ConnectionAccepted {
+//            if code.value == ConnectionAccepted {
 //                self.mqttInstance.publishString("Connectioned \(clientID)", toTopic: self.topics[0], withQos: AtMostOnce, retain: true, completionHandler: { mid in
 //                    
 //                    println("message has been delivered");
 //                    })
 //                println("Connection Accepted")
 //            } else {
-//                println("return code \(code.value)")
+                println("MQTT CONNECTED return code \(code.value)")
 //            }
             
         })

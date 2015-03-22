@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 //        // Override point for customization after application launch.
 
+        MQTTPipe.sharedInstance.sendMessage("POSTER HELPER ONLINE")
 
         return true
     }

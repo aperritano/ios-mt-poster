@@ -9,30 +9,43 @@
 import Foundation
 import UIKit
 import CCMPopup
+import SwiftEventBus
+import Async
+import SVProgressHUD
 
 class PosterItemCollectionController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    var posterItems: [PosterItem] = [PosterItem]()
     var selectedPosterId : String?
+    var popupController: AddPosterItemController?
+
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var nameLabels : [String] = ["GROUP 1", "GROUP 2", "GROUP 3","GROUP 4","GROUP 5","GROUP 6","GROUP 7","GROUP 8","GROUP 8"]
     var selectedColor: UIColor?
-    var selectedPoster: String?
-    
-    var colors: [UIColor] = [UIColor.paperColorRed400(), UIColor.paperColorIndigo400(), UIColor.paperColorLime400(), UIColor.paperColorLightBlue400(), UIColor.paperColorAmber400(), UIColor.paperColorOrange400(), UIColor.paperColorBrown400(), UIColor.paperColorTeal400(), UIColor.paperColorPink400(), UIColor.paperColorBlue400(), UIColor.paperColorGray400(), UIColor.paperColorDeepPurple400(), UIColor.paperColorGreen400()]
+    var isEditing = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        posterItems = DBHelper.sharedMonitor().fetchPosterItemsWithPoster(selectedPosterId!);
+
         
-        UINavigationBar.appearance().barTintColor = selectedColor
+        UINavigationBar.appearance().barTintColor = UIColor.paperColorGray600()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
+        SwiftEventBus.onMainThread(self, name: "PosterItemsReloadedEvent") { _ in
+            self.reloadWithDBHelper()
+        }
+    }
+    
+    func reloadWithDBHelper() {
+        self.collectionView?.reloadData()
+        
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posterItems.count
+        return DBHelper.sharedMonitor().fetchPosterItemsWithPoster(selectedPosterId!).count
     }
     
     
@@ -40,51 +53,14 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
         return UIEdgeInsetsMake(5, 5, 5, 5);
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-                var cell = collectionView.cellForItemAtIndexPath(indexPath)
-                cell?.contentView.backgroundColor = UIColor.paperColorOrange400()
-
-    }
-    
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        var cell = collectionView.cellForItemAtIndexPath(indexPath)
-        cell?.contentView.backgroundColor = UIColor.paperColorBlue400()
-    }
-    
-    func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject!) -> Bool {
-        
-        return true
-    }
-
-    func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject!) {
-        //
-    }
-    
-    
-    var popupController: AddPosterItemController?
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-//        CCMPopupSegue *popupSegue = (CCMPopupSegue *)segue;
-//        if (self.view.bounds.size.height < 420) {
-//            popupSegue.destinationBounds = CGRectMake(0, 0, ([UIScreen mainScreen].bounds.size.height-20) * .75, [UIScreen mainScreen].bounds.size.height-20);
-//        } else {
-//            popupSegue.destinationBounds = CGRectMake(0, 0, 300, 400);
-//        }
-//        popupSegue.backgroundBlurRadius = 7;
-//        popupSegue.backgroundViewAlpha = 0.3;
-//        popupSegue.backgroundViewColor = [UIColor blackColor];
-//        popupSegue.dismissableByTouchingBackground = YES;
-//        self.popupController = popupSegue.destinationViewController;
         var popupSegue : CCMPopupSegue = segue as CCMPopupSegue
         if self.view.bounds.size.height < 420 {
             popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
         } else {
-            popupSegue.destinationBounds = CGRectMake(0, 0, 800, 700)
+            popupSegue.destinationBounds = CGRectMake(0, 0, 800, 850)
         }
             popupSegue.backgroundBlurRadius = 7
             popupSegue.backgroundViewAlpha = 0.9
@@ -95,39 +71,37 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
         
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        self.view.layoutIfNeeded()
-//        if (size.height < 420) {
-//            [UIView animateWithDuration:[coordinator transitionDuration] animations:^{
-//                self.popupController.view.bounds = CGRectMake(0, 0, (size.height-20) * .75, size.height-20);
-//                [self.view layoutIfNeeded];
-//                }];
-//        } else {
-        
-        UIView.animateWithDuration(coordinator.transitionDuration(), animations: {
-            self.popupController?.view.bounds = CGRectMake(0, 0, 800, 700)
-            self.view.layoutIfNeeded()
-        
-        })
-        
-        
-    }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell : PosterItemCell = collectionView.dequeueReusableCellWithReuseIdentifier("PosterItemCell", forIndexPath: indexPath) as PosterItemCell
-        let color = UIColor.paperColorBlue400()
+        let color = UIColor.paperColorOrange400()
+
+        let posterItems = DBHelper.sharedMonitor().fetchPosterItemsWithPoster(selectedPosterId!)
+        
         let posterItem = posterItems[indexPath.row]
+       
+        cell.title.text = posterItem.name
         
+        if posterItem.type == "txt" {
+           cell.contentLabel.text = posterItem.content
         
+           cell.posterImage.image = nil
+            
+        } else if posterItem.type == "img" {
+            
+            cell.contentLabel.text = posterItem.content
+            let decodedData = NSData(base64EncodedString: posterItem.image_bytes!, options: NSDataBase64DecodingOptions(0))
+            
+            var decodedimage = UIImage(data: decodedData!)
+            cell.posterImage.image = decodedimage as UIImage!
+        }
 
-        cell.title.text = posterItems[indexPath.row].name
+       
         
-        let decodedData = NSData(base64EncodedString: posterItem.image_bytes!, options: NSDataBase64DecodingOptions(0))
-
-        var decodedimage = UIImage(data: decodedData!)
-        cell.posterImage.image = decodedimage as UIImage!
         
-        cell.backgroundColor = color
+        cell.removeButton.hidden = !isEditing
+        cell.removeButton.tag = indexPath.row;
+          cell.backgroundColor = color
         return cell
         
     }
@@ -135,83 +109,230 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     
     
     @IBAction func popoverCancelButton(segue:UIStoryboardSegue) {
+         var posterItemController = segue.sourceViewController as AddPosterItemController
+        posterItemController.dismissAnimated()
     }
     
     @IBAction func popoverAddButton(segue:UIStoryboardSegue) {
-  
+        var addPosterItemController = segue.sourceViewController as AddPosterItemController
+        addPosterItemController.dismissViewControllerAnimated(true, completion: {
+            
+            var postPosterItems = [PosterItem]()
+            var selectedPoster = DBHelper.sharedMonitor().fetchPoster(self.selectedPosterId!)
+            if let titleMessage = addPosterItemController.titleField.text {
+                var posterItem  = PosterItem()
+                posterItem.uuid = NSUUID().UUIDString
+                posterItem.x = 500
+                posterItem.y = 500
+                posterItem.width = 500
+                posterItem.height = 500
+                posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
+                posterItem.type = "txt"
+                posterItem.content = titleMessage
+                selectedPoster?.posterItems?.append(posterItem.uuid!)
+                Async.background {
+                        DBHelper.sharedMonitor().createPosterItem(posterItem)
+                }
+
+
+            }
         
-        
-        
-        
-            var posterItemController = segue.sourceViewController as AddPosterItemController
+            if let captionMessage = addPosterItemController.captionTextField.text {
+                var posterItem  = PosterItem()
+                posterItem.uuid = NSUUID().UUIDString
+                posterItem.x = 500
+                posterItem.y = 500
+                posterItem.width = 500
+                posterItem.height = 500
+                posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
+                posterItem.type = "txt"
+                posterItem.content = captionMessage
+                selectedPoster?.posterItems?.append(posterItem.uuid!)
+                Async.background {
+                    DBHelper.sharedMonitor().createPosterItem(posterItem)
+                }
+
+                
+            }
             
-            
-            
-        
-            
-        posterItemController.dismissViewControllerAnimated(true, completion: {
-            
-            var imageData = UIImagePNGRepresentation(posterItemController.posterImageView.image)
-            let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
-            
-            
-            
-            var posterItem  = PosterItem()
-            posterItem.id = NSUUID().UUIDString
-            posterItem.x = 500
-            posterItem.y = 500
-            posterItem.width = 500
-            posterItem.height = 500
-            
-            if let message = posterItemController.messageTextField.text {
-                posterItem.name = message
-            } else {
-                posterItem.name = "poster-image-5"
+            if let imageData = UIImagePNGRepresentation(addPosterItemController.posterImageView.image) {
+                let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
+                
+                var posterItem  = PosterItem()
+                posterItem.uuid = NSUUID().UUIDString
+                posterItem.x = 500
+                posterItem.y = 500
+                posterItem.width = 500
+                posterItem.height = 500
+                posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
+                posterItem.type = "img"
+                posterItem.content = "image"
+                posterItem.image_bytes = base64String
+               // posterItem.image_id = "png"
+                selectedPoster?.posterItems?.append(posterItem.uuid!)
+                
+
+                Async.background {
+                    DBHelper.sharedMonitor().createPosterItem(posterItem)
+                }
+
             }
             
             
-            posterItem.image_bytes = base64String
-            posterItem.image_id = "png"
+            
+            Async.background {
+                
+
+                DBHelper.sharedMonitor().updatePoster(selectedPoster!)
+                
+            }
+
+                
+                
+                
+                
             
             
-            self.posterItems.append(posterItem)
-            
-                        self.collectionView.reloadData()
         
         })
-
-
-
-        
-        
-
-        
     }
     
-    
-    @IBAction func deleteAction(sender: AnyObject) {
-        
-        self.collectionView.performBatchUpdates({
-            
-            var indexPaths = self.collectionView.indexPathsForSelectedItems()
-            
-            var trash: [PosterItem] = [PosterItem]()
-            
-            for path in indexPaths {
-                trash.append(self.posterItems[path.row])
+
+    @IBAction func DeleteCellAction(sender: MKButton) {
+
+        SweetAlert().showAlert("Are you sure?", subTitle: "This POSTER ITEM will be permanently delete!", style: AlertStyle.Warning, buttonTitle:"Cancel", buttonColor:UIColor.paperColorBlue400() , otherButtonTitle:  "YES", otherButtonColor: UIColor.paperColorRed()) { (isOtherButton) -> Void in
+            if isOtherButton == true {
+                println("Cancel Button  Pressed")
+            } else {
                 
-                self.posterItems.removeAtIndex(path.row)
+                var posterItemId : String?
+                var posterItems = DBHelper.sharedMonitor().fetchPosterItemsWithPoster(self.selectedPosterId!)
+                
+                var indexPath : NSIndexPath = self.collectionView.indexPathForItemAtPoint(self.collectionView.convertPoint(sender.center, fromView: sender.superview))!
+            
+                
+                    
+                
+                var selectedPosterItem = posterItems[indexPath.row]
+                posterItemId = selectedPosterItem.uuid!
+                
+    
+                Async.background {
+                    
+                    
+                    DBHelper.sharedMonitor().deletePosterItem(selectedPosterItem)
+                    
+                    
+                }.background{
+                    var selectedPoster = DBHelper.sharedMonitor().fetchPoster(self.selectedPosterId!)
+
+                    var localPosterItems = selectedPoster?.posterItems as [String]!
+                    if let index = find(localPosterItems, posterItemId!) {
+                        selectedPoster?.posterItems?.removeAtIndex(index)
+                        DBHelper.sharedMonitor().updatePoster(selectedPoster!)                            
+                    }
+                }.main{
+                        self.collectionView.deleteItemsAtIndexPaths([indexPath])
+                        self.collectionView.reloadData()
+                        self.isEditing = false
+                        self.editButton.tintColor = UIColor.paperColorBlue400()
+                        SweetAlert().showAlert("Deleted!", subTitle: "This user has been deleted!", style: AlertStyle.Success)
+                }
             }
             
-
             
-            self.collectionView.deleteItemsAtIndexPaths(indexPaths)
-            }, completion: nil)
+        }
+
         
     }
     
-    @IBAction func editAction(sender: UIBarButtonItem) {
+    @IBAction func toggleEditMode(sender: UIBarButtonItem) {
+        if isEditing == false {
+            isEditing = true
+            sender.tintColor = UIColor.paperColorRed()
+        } else {
+            isEditing = false
+            sender.tintColor = UIColor.paperColorBlue400()
+        }
+        
+        self.reloadWithDBHelper()
     }
+    
+//    func sendMessage(sender : AnyObject) {
+//        
+//        if messageTextField.text != nil {
+//            
+//            println("message \(messageTextField.text)")
+//            
+//            //    MQTTPipe.sharedInstance.sendMessage(messageTextField.text)
+//        }
+//        
+//    }
+//    
+//    func subscribeTopic(sender : AnyObject) {
+//        
+//        if (topicTextField.text != nil) {
+//            
+//            println("topic \(topicTextField.text)")
+//            
+//            //  MQTTPipe.sharedInstance.subscribeTopic(topicTextField.text)
+//        }
+//    }
+
+    
+    @IBAction func sendImageToPoster(sender: UIButton) {
+        println("HEY THERE")
+        
+        
+        //        // Create a thumbnail and add a corner radius for use in table views
+        //        UIImage *thumbnailImage = [anImage thumbnailImage:86.0f
+        //        transparentBorder:0.0f
+        //        cornerRadius:10.0f
+        //        interpolationQuality:kCGInterpolationDefault];
+        //
+        //        // Get an NSData representation of our images. We use JPEG for the larger image
+        //        // for better compression and PNG for the thumbnail to keep the corner radius transparency
+        //        NSData *imageData = UIImageJPEGRepresentation(resizedImage, 0.8f);
+        //        NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage, 0.8f);
+        //
+        //        if (!imageData || !thumbnailImageData) {
+        //            return NO;
+        //        }
+        //
+        //        var reducedImage = UIImageJPEGRepresentation(selectedImage, 5.0)
+        //        var pfile = PFFile(data: reducedImage)
+        //        var bgTask = UIBackgroundTaskIdentifier()
+        //
+        //        var gameScore = PFObject(className: "Photo")
+        //        gameScore.setObject(pfile, forKey: "image")
+        //        gameScore.saveInBackgroundWithBlock {
+        //            (success: Bool!, error: NSError!) -> Void in
+        //            if (success != nil) {
+        //                NSLog("Object created with id: \(gameScore.objectId)")
+        //            } else {
+        //                NSLog("%@", error)
+        //            }
+        //        }
+        //
+        //        bgTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
+        //            UIApplication.sharedApplication().endBackgroundTask(bgTask)
+        //        }
+        //
+        //        gameScore.saveInBackgroundWithBlock { (success: Bool!, error: NSError!) -> Void in
+        //            if (success != nil) {
+        //                NSLog("Object created with id: \(gameScore.objectId)")
+        //            } else {
+        //                NSLog("%@", error)
+        //            }
+        //            UIApplication.sharedApplication().endBackgroundTask(bgTask)
+        //        }
+        
+        
+        
+        
+        
+    }
+
     @IBAction func onBurger() {
         (tabBarController as TabBarController).sidebar.showInViewController(self, animated: true)
     }
