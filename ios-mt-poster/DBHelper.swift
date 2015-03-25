@@ -8,7 +8,6 @@ import SVProgressHUD
 import Alamofire
 //import Alamofire_SwiftyJSON
 import ObjectMapper
-import SwiftEventBus
 import SwiftyJSON
 import Async
 
@@ -27,6 +26,7 @@ class DBHelper: NSObject {
     var allUsers = [User]()
     var allPosters = [Poster]()
     var allPosterItems = [PosterItem]()
+    var posterMessageBuilder : PosterMessage!
     
     var percentComplete : Float = 0.0
     
@@ -44,6 +44,10 @@ class DBHelper: NSObject {
 
         
         SVProgressHUD.showProgress(0, status: "Fetching...", maskType: SVProgressHUDMaskType.Gradient)
+        self.fetchAllCollections()
+    }
+    
+    func fetchAllCollections() {
         fetchUsers()
         fetchPosters()
         fetchPosterItems()
@@ -105,7 +109,7 @@ class DBHelper: NSObject {
         
         Alamofire.request(.PUT, url, parameters: [:], encoding: .Custom({
             (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as NSMutableURLRequest
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
             mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             mutableRequest.HTTPBody = json.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             return (mutableRequest, nil)
@@ -136,7 +140,6 @@ class DBHelper: NSObject {
 //                    }
                 case URL_TYPE.POSTER_ITEM:
                     let posterItem = Mapper<PosterItem>().map(JSON)
-                    
 //                    if posterItem != nil {
 //                        self.allPosterItems.append(posterItem!)
 //                        self.sendoutEvent(postType)
@@ -164,7 +167,7 @@ class DBHelper: NSObject {
 
         Alamofire.request(.POST, url, parameters: [:], encoding: .Custom({
             (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as NSMutableURLRequest
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
             mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             mutableRequest.HTTPBody = userJSON.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             return (mutableRequest, nil)
@@ -203,6 +206,26 @@ class DBHelper: NSObject {
                     if posterItem != nil {
                         self.allPosterItems.append(posterItem!)
                         self.sendoutEvent(postType)
+                        
+                        
+                        //send mqtt message
+
+                        self.posterMessageBuilder.posterItemId = posterItem?.id
+                        
+//                       let JSONString = Mapper().toJSONString(posterItem as PosterItem!, prettyPrint: false)
+//
+
+                        self.posterMessageBuilder.action = ADD
+                        self.posterMessageBuilder.content = "NEED YOU"
+                        self.posterMessageBuilder.type = POSTER_ITEM
+                        
+                        var finalstring = Mapper().toJSONString(self.posterMessageBuilder, prettyPrint: false)
+                        
+                        NSLog("FINAL MESSAGE POSTER STRING  \(finalstring)")
+                        
+                        MQTTPipe.sharedInstance.sendMessage(finalstring)
+                        
+                        
                     }
                 default:
                     println("Type is something else")
@@ -272,7 +295,7 @@ class DBHelper: NSObject {
         println("starting delete")
 
 
-        Alamofire.request(.DELETE, url, parameters: [:]).responseString { (request, response, JSON, error) in
+        Alamofire.request(.DELETE, url, parameters: [:]).responseJSON { (request, response, JSON, error) in
 
             if (error != nil) {
                 NSLog("Error: \(error)")
@@ -280,7 +303,7 @@ class DBHelper: NSObject {
                 NSLog("Success DELETE \(postType) RESPONSE \(response)")
                 self.sendoutEvent(postType)
             }
-            
+
         }
     }
 

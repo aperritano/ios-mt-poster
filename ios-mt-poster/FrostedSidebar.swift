@@ -117,14 +117,16 @@ public class FrostedSidebar: UIViewController {
     public override func supportedInterfaceOrientations() -> Int {
         return Int(UIInterfaceOrientationMask.All.rawValue)
     }
-    
-    public override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        super.willAnimateRotationToInterfaceOrientation(toInterfaceOrientation, duration: duration)
-        
+
+
+
+    public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         if isViewLoaded(){
             dismissAnimated(false, completion: nil)
         }
     }
+
     
     public func showInViewController(viewController: UIViewController, animated: Bool){
         if let bar = sharedSidebar{
@@ -245,8 +247,8 @@ public class FrostedSidebar: UIViewController {
             imageView.center = CGPoint(x: inset, y: inset)
         }
         
-        override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-            super.touchesBegan(touches, withEvent: event)
+        override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+            super.touchesBegan(touches as Set<NSObject>, withEvent: event)
             
             var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
             let darkenFactor: CGFloat = 0.3
@@ -262,12 +264,13 @@ public class FrostedSidebar: UIViewController {
             backgroundColor = darkerColor
         }
         
-        override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-            super.touchesEnded(touches, withEvent: event)
+        override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+            super.touchesEnded(touches as Set<NSObject>, withEvent: event)
             backgroundColor = originalBackgroundColor
         }
         
-        override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+        override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+            
             super.touchesCancelled(touches, withEvent: event)
             backgroundColor = originalBackgroundColor
         }

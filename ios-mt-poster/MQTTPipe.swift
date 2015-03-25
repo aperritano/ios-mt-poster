@@ -15,9 +15,9 @@ let _mqttSharedInstance = MQTTPipe()
 
 class MQTTPipe {
     
-    let kMQTTServerHost = "iot.eclipse.org"
-    let kInitTopic = "IAMPOSTER"
-    var topics = ["IAMPOSTER"]
+    let kMQTTServerHost = "ltg.evl.uic.edu"
+    let kInitTopic = "IAMPOSTERIN"
+    var topics = ["IAMPOSTERIN"]
     var mqttInstance: MQTTClient
     
     class var sharedInstance : MQTTPipe {
@@ -46,7 +46,7 @@ class MQTTPipe {
     
     func subscribeTopic(topic: String) {
         
-        mqttInstance.subscribe(topic, withCompletionHandler: { grantedQos in
+        mqttInstance.subscribe("IAMPOSTER.OUT", withCompletionHandler: { grantedQos in
             println("subscribed to topic \(topic)");
             
         })
@@ -54,13 +54,16 @@ class MQTTPipe {
     }
     
     func sendMessage(message: String) {
+     
         
-        for topic in topics {
-            mqttInstance.publishString(message, toTopic: topic, withQos: AtMostOnce, retain: false, completionHandler: { mid in
+        mqttInstance.reconnect()
+
+        
+        mqttInstance.publishString(message, toTopic: "IAMPOSTERIN", withQos: AtMostOnce, retain: false, completionHandler: { mid in
                 
                 println("message has been delivered");
-                })
-        }
+            })
+        
         
        
     }

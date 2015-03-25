@@ -8,7 +8,6 @@
 
 import UIKit
 
-import ios_mt_poster
 
 import XCTest
 

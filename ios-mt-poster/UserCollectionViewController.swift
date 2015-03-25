@@ -9,27 +9,30 @@
 import Foundation
 import BFPaperCollectionViewCell
 import UIColor_BFPaperColors
-import SwiftEventBus
 import ObjectMapper
 import CCMPopup
 import Async
 
+
 class UserCollectionViewController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    var nameLabels : [String] = ["GROUP 1", "GROUP 2", "GROUP 3","GROUP 4","GROUP 5","GROUP 6","GROUP 7","GROUP 8","GROUP 8"]
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var isEditing = false
-    
-    var colors: [UIColor] = [UIColor.paperColorRed400(), UIColor.paperColorIndigo400(), UIColor.paperColorPink400(), UIColor.paperColorLightBlue400(), UIColor.paperColorAmber400(), UIColor.paperColorOrange400(), UIColor.paperColorBrown400(), UIColor.paperColorTeal400(), UIColor.paperColorPink400(), UIColor.paperColorBlue400(), UIColor.paperColorGray400(), UIColor.paperColorDeepPurple400(), UIColor.paperColorGreen400()]
-    
-    
+    var isDoingEdits = false
     var popupController: AddUserController?
 
     
     override func viewDidLoad() {
+        
+        UINavigationBar.appearance().barTintColor = UIColor.paperColorGray600()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        
+       DBHelper.sharedMonitor().posterMessageBuilder = PosterMessage()
+        
         super.viewDidLoad()
     }
     
@@ -56,7 +59,7 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell : UserCell = collectionView.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as UserCell
+        var cell : UserCell = collectionView.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
         let color = colors[indexPath.row]
         var foundUser = DBHelper.sharedMonitor().allUsers[indexPath.row];
         cell.title.text = foundUser.name
@@ -65,7 +68,7 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
             cell.nameTags.text = ",".join(foundUser.nameTags!)
         }
 
-        cell.removeButton.hidden = !isEditing
+        cell.removeButton.hidden = !isDoingEdits
         cell.removeButton.tag = indexPath.row;
         cell.backgroundColor = color
         return cell
@@ -73,13 +76,14 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "posterSegue"{
-            let vc = segue.destinationViewController as PosterCollectionController
-            let cell = sender as UserCell
+            let vc = segue.destinationViewController as! PosterCollectionController
+            let cell = sender as! UserCell
             let user = DBHelper.sharedMonitor().allUsers.filter(){ $0.name == cell.title.text }.first!
+            DBHelper.sharedMonitor().posterMessageBuilder.userUuid = user.uuid
             vc.selectedUserId = user.uuid
             vc.selectedColor = cell.backgroundColor                    
         } else if segue.identifier == "addUserSegue" {
-            var popupSegue : CCMPopupSegue = segue as CCMPopupSegue
+            var popupSegue : CCMPopupSegue = segue as! CCMPopupSegue
             if self.view.bounds.size.height < 420 {
                 popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
             } else {
@@ -96,11 +100,11 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
 
 
     @IBAction func toggleEditMode(sender: UIBarButtonItem) {
-        if isEditing == false {
-            isEditing = true
+        if isDoingEdits == false {
+            isDoingEdits = true
             sender.tintColor = UIColor.paperColorRed()
         } else {
-            isEditing = false
+            isDoingEdits = false
             sender.tintColor = UIColor.paperColorBlue400()
         }
         
@@ -118,7 +122,7 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
                     var indexPath : NSIndexPath = self.collectionView.indexPathForItemAtPoint(self.collectionView.convertPoint(sender.center, fromView: sender.superview))!
                     DBHelper.sharedMonitor().deleteUser(indexPath.row)
                     self.collectionView.deleteItemsAtIndexPaths([indexPath])
-                    self.isEditing = false
+                    self.isDoingEdits = false
                     self.editButton.tintColor = UIColor.paperColorBlue400()
                     } , completion: nil)
                 
@@ -133,7 +137,7 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
     
     
     @IBAction func popoverCancelButton(segue:UIStoryboardSegue) {
-        var addController = segue.sourceViewController as AddUserController
+        var addController = segue.sourceViewController as! AddUserController
         addController.dismissAnimated()
     }
     
@@ -141,7 +145,7 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
         
         
         
-        var addController = segue.sourceViewController as AddUserController
+        var addController = segue.sourceViewController as! AddUserController
         
         addController.dismissViewControllerAnimated(true, completion: {
         
@@ -176,25 +180,7 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
                     DBHelper.sharedMonitor().createUser(newUser)
                 }.background {
                     DBHelper.sharedMonitor().createPoster(newPoster)
-                }
-                
-                
-                Async.background {
-                    var message = PosterMessage()
-                    message.type = "user"
-                    message.action = "add"
-                    let JSONString = Mapper().toJSONString(newUser, prettyPrint: false)
-                    message.content = JSONString
-                    
-                    let JSONSMessage = Mapper().toJSONString(message, prettyPrint: false)
-                    
-                    MQTTPipe.sharedInstance.sendMessage(JSONSMessage)
-                    
-                }.background {
-                        DBHelper.sharedMonitor().createPoster(newPoster)
-                }
-                
- 
+                }                                        
 
             }
             
@@ -202,11 +188,49 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
         })
         
     }
+    @IBAction func refreshTheInterface(sender: UIBarButtonItem) {
+        DBHelper.sharedMonitor().fetchAllCollections()
+    }
 
-    
+    @IBAction func GoJoe() {
+        
+       
+        var posterItem = PosterItem()
+        
+        posterItem.uuid = NSUUID().UUIDString
+        posterItem.height = 1583
+        posterItem.width = 2876
+        posterItem.x = 100
+        posterItem.y = 100
+        posterItem.height = 250
+        posterItem.width = 200
+        posterItem.type = "txt"
+        posterItem.content = "HELLLO"
+        
+        let JSONString = Mapper().toJSONString(posterItem, prettyPrint: false)
+
+        
+        var mp = PosterMessage()
+        mp.action = "add"
+        mp.content = JSONString
+        mp.type = "poster_item"
+        
+        var finalstring = Mapper().toJSONString(mp, prettyPrint: false)
+        
+        MQTTPipe.sharedInstance.sendMessage(finalstring)
+
+            
+             NSLog("PRINTING \(finalstring)" )
+        
+        
+        
+
+        
+
+    }
     
     @IBAction func onBurger() {
-        (tabBarController as TabBarController).sidebar.showInViewController(self, animated: true)
+        (tabBarController as! TabBarController).sidebar.showInViewController(self, animated: true)
     }
     
    

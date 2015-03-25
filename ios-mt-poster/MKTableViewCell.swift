@@ -38,15 +38,20 @@ public class MKTableViewCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-        setupLayer()
-    }
-
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupLayer()
     }
+    
+    convenience init() {
+        self.init(frame:CGRectZero)
+    }
+
+    convenience init(frame: CGRect) {
+        self.init(frame: frame)
+        setupLayer()
+    }
+
 
     private func setupLayer() {
         selectionStyle = .None
@@ -54,11 +59,10 @@ public class MKTableViewCell : UITableViewCell {
         mkLayer.setCircleLayerColor(rippleLayerColor)
         mkLayer.ripplePercent = 1.2
     }
-
-    override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    
+    public override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
-
-        if let firstTouch = touches.anyObject() as? UITouch {
+        if let firstTouch = touches.first as? UITouch {
             if !contentViewResized {
                 mkLayer.superLayerDidResize()
                 contentViewResized = true

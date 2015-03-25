@@ -17,13 +17,17 @@ class AddPosterItemController: UIViewController, UIImagePickerControllerDelegate
     var fileUploadBackgroundTaskId : UIBackgroundTaskIdentifier?
 
     let tapRecognizer = UITapGestureRecognizer()
-
-    let uploadQueue : NSOperationQueue!
     var url : NSURL!
     
     @IBOutlet weak var captionTextField: UITextField!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var posterImageView: UIImageView!
+    
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //tap

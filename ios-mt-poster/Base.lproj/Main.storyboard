@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5cr-I4-VXH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7528.3" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="5cr-I4-VXH">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7518.3"/>
     </dependencies>
     <scenes>
         <!--NavigationController-->
@@ -10,7 +10,7 @@
                 <navigationController title="NavigationController" id="dra-hq-7Cf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="4ay-eb-odJ"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="77T-f3-LuV" customClass="RRNavigationBar" customModule="ios_mt_poster" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="77T-f3-LuV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -28,7 +28,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="r6z-Z1-1JA">
             <objects>
-                <tabBarController id="5cr-I4-VXH" customClass="TabBarController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="5cr-I4-VXH" customClass="TabBarController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3xF-fl-Amj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -46,7 +46,7 @@
         <!--Users Collection-->
         <scene sceneID="eeR-2O-c9l">
             <objects>
-                <viewController title="Users Collection " definesPresentationContext="YES" id="cFC-lS-XlA" userLabel="Users Collection" customClass="UserCollectionViewController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Users Collection " definesPresentationContext="YES" id="cFC-lS-XlA" userLabel="Users Collection" customClass="UserCollectionViewController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eb7-9r-vy5"/>
                         <viewControllerLayoutGuide type="bottom" id="Ez8-gD-Xnv"/>
@@ -55,6 +55,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cel-vm-h2E">
+                                <rect key="frame" x="0.0" y="660" width="1024" height="44"/>
+                                <items>
+                                    <barButtonItem image="angle-mask.png" style="plain" id="xwu-7D-Liq">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="YXs-3h-r51">
+                                            <rect key="frame" x="20" y="7" width="22" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="GoJoe" destination="cFC-lS-XlA" eventType="touchUpInside" id="tc8-pW-M39"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="refresh" id="2hV-AO-aYd">
+                                        <connections>
+                                            <action selector="refreshTheInterface:" destination="cFC-lS-XlA" id="CbE-EK-e5I"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Y8T-UG-zz2"/>
+                                    <barButtonItem systemItem="trash" id="j68-Iy-hFY">
+                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="toggleEditMode:" destination="cFC-lS-XlA" id="Ujw-Yg-HVg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="GJH-rC-eQR"/>
+                                    <barButtonItem systemItem="add" id="YKW-e4-5tW">
+                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="addUserAction:" destination="cFC-lS-XlA" id="jkt-3c-xit"/>
+                                            <segue destination="F3T-DW-BEc" kind="custom" identifier="addUserSegue" customClass="CCMPopupSegue" id="5mt-XA-wgS"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EPB-db-KPB">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="660"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -65,7 +102,7 @@
                                     <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="JYF-J7-J8L" customClass="UserCell" customModule="ios_mt_poster" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="JYF-J7-J8L" customClass="UserCell" customModule="PosterKit_Admin" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -90,7 +127,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlk-za-Hn3" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xlk-za-Hn3" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                                     <rect key="frame" x="44" y="16" width="246" height="66"/>
                                                     <color key="backgroundColor" red="0.77254901960784317" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
@@ -132,26 +169,6 @@
                                     <outlet property="delegate" destination="cFC-lS-XlA" id="FF7-9D-qmj"/>
                                 </connections>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cel-vm-h2E">
-                                <rect key="frame" x="0.0" y="660" width="1024" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Y8T-UG-zz2"/>
-                                    <barButtonItem systemItem="trash" id="j68-Iy-hFY">
-                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="toggleEditMode:" destination="cFC-lS-XlA" id="Ujw-Yg-HVg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="GJH-rC-eQR"/>
-                                    <barButtonItem systemItem="add" id="YKW-e4-5tW">
-                                        <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="addUserAction:" destination="cFC-lS-XlA" id="jkt-3c-xit"/>
-                                            <segue destination="F3T-DW-BEc" kind="custom" identifier="addUserSegue" customClass="CCMPopupSegue" id="5mt-XA-wgS"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -176,7 +193,7 @@
         <!--Poster Collection-->
         <scene sceneID="LiV-Vx-cOB">
             <objects>
-                <viewController storyboardIdentifier="Poster Collection" title="Poster Collection" definesPresentationContext="YES" id="BKN-co-WQw" customClass="PosterCollectionController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Poster Collection" title="Poster Collection" definesPresentationContext="YES" id="BKN-co-WQw" customClass="PosterCollectionController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="beC-xb-seT"/>
                         <viewControllerLayoutGuide type="bottom" id="Fog-zJ-blK"/>
@@ -195,7 +212,7 @@
                                     <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserCell" id="eQg-85-gQi" customClass="UserCell" customModule="ios_mt_poster" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PosterCell" id="eQg-85-gQi" customClass="PosterCell" customModule="PosterKit_Admin" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -204,17 +221,17 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGa-YE-oSh">
                                                     <rect key="frame" x="0.0" y="91" width="334" height="46"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AwQ-bL-nnA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="N PosterItems" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AwQ-bL-nnA">
                                                     <rect key="frame" x="0.0" y="179" width="334" height="46"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVk-UL-1Ki" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVk-UL-1Ki" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                                     <rect key="frame" x="44" y="14" width="246" height="66"/>
                                                     <color key="backgroundColor" red="0.7725490196" green="0.0" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
@@ -299,7 +316,7 @@
         <!--Add User Controller-->
         <scene sceneID="5Sg-Yi-SXU">
             <objects>
-                <viewController id="F3T-DW-BEc" customClass="AddUserController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F3T-DW-BEc" customClass="AddUserController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Nu-Th-Ye7"/>
                         <viewControllerLayoutGuide type="bottom" id="opW-1b-Vyd"/>
@@ -308,7 +325,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="650" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Y0-Yi-zDO" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Y0-Yi-zDO" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                 <rect key="frame" x="202" y="257" width="246" height="66"/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
@@ -329,7 +346,7 @@
                                     <segue destination="Ii9-8j-a5t" kind="unwind" unwindAction="popoverAddButton:" id="DUa-FN-cy1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ar7-CO-QbH" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ar7-CO-QbH" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                 <rect key="frame" x="592" y="8" width="50" height="45"/>
                                 <state key="normal" title="Button" image="icon2.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -393,7 +410,7 @@
         <!--Add Poster Controller-->
         <scene sceneID="FC5-cM-gO7">
             <objects>
-                <viewController id="INj-mC-MJb" customClass="AddPosterController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="INj-mC-MJb" customClass="AddPosterController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2fc-rB-Gyg"/>
                         <viewControllerLayoutGuide type="bottom" id="DII-KL-hO2"/>
@@ -407,7 +424,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jw-ac-che" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jw-ac-che" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                 <rect key="frame" x="591" y="8" width="50" height="45"/>
                                 <state key="normal" title="Button" image="icon2.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -422,7 +439,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCn-gV-hdx" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCn-gV-hdx" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                 <rect key="frame" x="202" y="150" width="246" height="66"/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
@@ -463,7 +480,7 @@
         <!--PosterItem Collection-->
         <scene sceneID="EBc-J7-cHO">
             <objects>
-                <viewController title="PosterItem Collection" definesPresentationContext="YES" id="93P-Nc-6tW" customClass="PosterItemCollectionController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="PosterItem Collection" definesPresentationContext="YES" id="93P-Nc-6tW" customClass="PosterItemCollectionController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9LT-k8-fiO"/>
                         <viewControllerLayoutGuide type="bottom" id="4XC-wV-Qia"/>
@@ -482,7 +499,7 @@
                                     <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PosterItemCell" id="EHn-Dg-vuZ" customClass="PosterItemCell" customModule="ios_mt_poster" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PosterItemCell" id="EHn-Dg-vuZ" customClass="PosterItemCell" customModule="PosterKit_Admin" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -504,7 +521,7 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfb-mL-Jl0" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfb-mL-Jl0" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                                     <rect key="frame" x="44" y="23" width="246" height="66"/>
                                                     <color key="backgroundColor" red="0.7725490196" green="0.0" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
@@ -588,17 +605,17 @@
         <!--AddPosterViewController-->
         <scene sceneID="jst-xw-5OE">
             <objects>
-                <viewController title="AddPosterViewController" id="yfH-Ed-Mlg" customClass="AddPosterItemController" customModule="ios_mt_poster" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="AddPosterViewController" id="yfH-Ed-Mlg" customClass="AddPosterItemController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dSj-5g-CP6"/>
                         <viewControllerLayoutGuide type="bottom" id="byd-2k-tjo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NeE-WI-jmH">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="850"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="750"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kfj-ih-GuQ">
-                                <rect key="frame" x="80" y="148" width="640" height="480"/>
+                                <rect key="frame" x="116" y="148" width="542" height="396"/>
                                 <color key="backgroundColor" red="0.043140001599999998" green="0.14117999370000001" blue="0.98430997129999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -606,7 +623,7 @@
                                 </connections>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CAPTION" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOW-xp-j0Q">
-                                <rect key="frame" x="80" y="673" width="640" height="30"/>
+                                <rect key="frame" x="80" y="581" width="640" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -621,7 +638,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-hx-dQa" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-hx-dQa" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
                                 <rect key="frame" x="739" y="8" width="50" height="45"/>
                                 <state key="normal" title="Button" image="icon2.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -643,13 +660,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Caption:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5J-qe-EZH">
-                                <rect key="frame" x="80" y="644" width="66" height="21"/>
+                                <rect key="frame" x="80" y="552" width="66" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-cd-BkV" customClass="MKButton" customModule="ios_mt_poster" customModuleProvider="target">
-                                <rect key="frame" x="238" y="744" width="275" height="66"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-cd-BkV" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
+                                <rect key="frame" x="250" y="639" width="275" height="66"/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -677,7 +694,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="800" height="850"/>
+                    <size key="freeformSize" width="800" height="750"/>
                     <connections>
                         <outlet property="captionTextField" destination="iOW-xp-j0Q" id="HvW-3U-aH6"/>
                         <outlet property="posterImageView" destination="kfj-ih-GuQ" id="nfE-VY-u0k"/>
@@ -696,6 +713,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="angle-mask.png" width="100" height="100"/>
         <image name="burger.png" width="19" height="17"/>
         <image name="icon2.png" width="154" height="154"/>
     </resources>

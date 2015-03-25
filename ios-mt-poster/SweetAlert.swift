@@ -37,8 +37,13 @@ class SweetAlert: UIViewController {
     var userAction:((isOtherButton: Bool) -> Void)? = nil
     let kFont = "Helvetica"
 
-    override init() {
-        super.init()
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    convenience init() {
+        self.init()
         
         self.view.frame = UIScreen.mainScreen().bounds
         self.view.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
@@ -172,9 +177,6 @@ class SweetAlert: UIViewController {
     
     }
     
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName:nibNameOrNil, bundle:nibBundleOrNil)
@@ -250,7 +252,7 @@ class SweetAlert: UIViewController {
     func showAlert(title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,otherButtonTitle:
         String?, otherButtonColor: UIColor?,action: ((isOtherButton: Bool) -> Void)? = nil) {
             userAction = action
-            let window = UIApplication.sharedApplication().keyWindow?.subviews.first as UIView
+            let window = UIApplication.sharedApplication().keyWindow?.subviews.first as! UIView
             window.addSubview(view)
             view.frame = window.bounds
             self.setupContentView()
@@ -286,7 +288,7 @@ class SweetAlert: UIViewController {
             buttons = []
             if buttonTitle.isEmpty == false {
             
-                var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+                var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
                 button.setTitle(buttonTitle, forState: UIControlState.Normal)
                 button.backgroundColor = buttonColor
                 button.userInteractionEnabled = true
@@ -298,7 +300,7 @@ class SweetAlert: UIViewController {
             
             if otherButtonTitle != nil && otherButtonTitle!.isEmpty == false {
                 
-                var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+                var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
                 button.setTitle(otherButtonTitle, forState: UIControlState.Normal)
                 button.backgroundColor = otherButtonColor
                 button.addTarget(self, action: "pressed:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -380,11 +382,7 @@ class CancelAnimatedView: AnimatableView {
     var circleLayer = CAShapeLayer()
     var crossPathLayer = CAShapeLayer()
     
-    override init() {
-        super.init()
-    }
-    
-    override required init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayers()
         var t = CATransform3DIdentity;
@@ -394,14 +392,15 @@ class CancelAnimatedView: AnimatableView {
         crossPathLayer.opacity = 0.0
 
     }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func layoutSubviews() {
         setupLayers()
     }
-    
-    required override init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
     
      var outlineCircle: CGPath  {
         var path = UIBezierPath()
@@ -494,22 +493,20 @@ class InfoAnimatedView: AnimatableView {
     var circleLayer = CAShapeLayer()
     var crossPathLayer = CAShapeLayer()
     
-    override init() {
-        super.init()
-    }
-    
+
     override required init(frame: CGRect) {
         super.init(frame: frame)
         setupLayers()
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override func layoutSubviews() {
         setupLayers()
     }
     
-    required override init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     var outlineCircle: CGPath  {
         var path = UIBezierPath()
@@ -557,8 +554,10 @@ class SuccessAnimatedView: AnimatableView {
     var circleLayer = CAShapeLayer()
     var outlineLayer = CAShapeLayer()
     
-    override init() {
-        super.init()
+ 
+    
+    convenience init() {
+        self.init()
         self.setupLayers()
         circleLayer.strokeStart = 0.0
         circleLayer.strokeEnd = 0.0
@@ -572,8 +571,9 @@ class SuccessAnimatedView: AnimatableView {
         circleLayer.strokeEnd = 0.0
     }
     
-    required override init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required public init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+     
     }
     
     override func layoutSubviews() {

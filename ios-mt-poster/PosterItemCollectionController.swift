@@ -9,9 +9,8 @@
 import Foundation
 import UIKit
 import CCMPopup
-import SwiftEventBus
 import Async
-import SVProgressHUD
+import ObjectMapper
 
 class PosterItemCollectionController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -23,16 +22,16 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     @IBOutlet weak var editButton: UIBarButtonItem!
     
     var selectedColor: UIColor?
-    var isEditing = false
+    var isDoingEditing = false
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        
         UINavigationBar.appearance().barTintColor = UIColor.paperColorGray600()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         SwiftEventBus.onMainThread(self, name: "PosterItemsReloadedEvent") { _ in
             self.reloadWithDBHelper()
@@ -56,11 +55,11 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        var popupSegue : CCMPopupSegue = segue as CCMPopupSegue
+        var popupSegue : CCMPopupSegue = segue as! CCMPopupSegue
         if self.view.bounds.size.height < 420 {
             popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
         } else {
-            popupSegue.destinationBounds = CGRectMake(0, 0, 800, 850)
+            popupSegue.destinationBounds = CGRectMake(0, 0, 800, 750)
         }
             popupSegue.backgroundBlurRadius = 7
             popupSegue.backgroundViewAlpha = 0.9
@@ -73,7 +72,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell : PosterItemCell = collectionView.dequeueReusableCellWithReuseIdentifier("PosterItemCell", forIndexPath: indexPath) as PosterItemCell
+        var cell : PosterItemCell = collectionView.dequeueReusableCellWithReuseIdentifier("PosterItemCell", forIndexPath: indexPath) as! PosterItemCell
         let color = UIColor.paperColorOrange400()
 
         let posterItems = DBHelper.sharedMonitor().fetchPosterItemsWithPoster(selectedPosterId!)
@@ -99,7 +98,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
        
         
         
-        cell.removeButton.hidden = !isEditing
+        cell.removeButton.hidden = !isDoingEditing
         cell.removeButton.tag = indexPath.row;
           cell.backgroundColor = color
         return cell
@@ -109,15 +108,15 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     
     
     @IBAction func popoverCancelButton(segue:UIStoryboardSegue) {
-         var posterItemController = segue.sourceViewController as AddPosterItemController
+         var posterItemController = segue.sourceViewController as! AddPosterItemController
         posterItemController.dismissAnimated()
     }
     
     @IBAction func popoverAddButton(segue:UIStoryboardSegue) {
-        var addPosterItemController = segue.sourceViewController as AddPosterItemController
+        var addPosterItemController = segue.sourceViewController as! AddPosterItemController
         addPosterItemController.dismissViewControllerAnimated(true, completion: {
             
-            var postPosterItems = [PosterItem]()
+            var mqttPosterItems = [PosterItem]()
             var selectedPoster = DBHelper.sharedMonitor().fetchPoster(self.selectedPosterId!)
             if let titleMessage = addPosterItemController.titleField.text {
                 var posterItem  = PosterItem()
@@ -130,11 +129,12 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
                 posterItem.type = "txt"
                 posterItem.content = titleMessage
                 selectedPoster?.posterItems?.append(posterItem.uuid!)
+                mqttPosterItems.append(posterItem)
                 Async.background {
-                        DBHelper.sharedMonitor().createPosterItem(posterItem)
+                    DBHelper.sharedMonitor().createPosterItem(posterItem)
                 }
-
-
+                
+                
             }
         
             if let captionMessage = addPosterItemController.captionTextField.text {
@@ -148,6 +148,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
                 posterItem.type = "txt"
                 posterItem.content = captionMessage
                 selectedPoster?.posterItems?.append(posterItem.uuid!)
+                mqttPosterItems.append(posterItem)
                 Async.background {
                     DBHelper.sharedMonitor().createPosterItem(posterItem)
                 }
@@ -157,7 +158,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
             
             if let imageData = UIImagePNGRepresentation(addPosterItemController.posterImageView.image) {
                 let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
-                
+
                 var posterItem  = PosterItem()
                 posterItem.uuid = NSUUID().UUIDString
                 posterItem.x = 500
@@ -170,8 +171,8 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
                 posterItem.image_bytes = base64String
                // posterItem.image_id = "png"
                 selectedPoster?.posterItems?.append(posterItem.uuid!)
-                
 
+                mqttPosterItems.append(posterItem)
                 Async.background {
                     DBHelper.sharedMonitor().createPosterItem(posterItem)
                 }
@@ -187,10 +188,30 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
                 
             }
 
-                
-                
-                
-                
+            
+//                Async.background {
+//                
+//                    for pi in mqttPosterItems {
+//                        var message = PosterMessage()
+//                        message.type = "posterItem"
+//                        message.action = "add"
+//                        let JSONString = Mapper().toJSONString(pi, prettyPrint: false)
+//                        message.content = JSONString
+//                        
+//                        let JSONSMessage = Mapper().toJSONString(message, prettyPrint: false)
+//                        
+//                        MQTTPipe.sharedInstance.sendMessage(JSONSMessage)
+//                    }
+//                    
+//                    
+//                }
+            
+        
+        
+
+        
+        
+        
             
             
         
@@ -234,7 +255,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
                 }.main{
                         self.collectionView.deleteItemsAtIndexPaths([indexPath])
                         self.collectionView.reloadData()
-                        self.isEditing = false
+                        self.isDoingEditing = false
                         self.editButton.tintColor = UIColor.paperColorBlue400()
                         SweetAlert().showAlert("Deleted!", subTitle: "This user has been deleted!", style: AlertStyle.Success)
                 }
@@ -247,11 +268,11 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     }
     
     @IBAction func toggleEditMode(sender: UIBarButtonItem) {
-        if isEditing == false {
-            isEditing = true
+        if isDoingEditing == false {
+            isDoingEditing = true
             sender.tintColor = UIColor.paperColorRed()
         } else {
-            isEditing = false
+            isDoingEditing = false
             sender.tintColor = UIColor.paperColorBlue400()
         }
         
@@ -334,7 +355,7 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     }
 
     @IBAction func onBurger() {
-        (tabBarController as TabBarController).sidebar.showInViewController(self, animated: true)
+        (tabBarController as! TabBarController).sidebar.showInViewController(self, animated: true)
     }
     
 }

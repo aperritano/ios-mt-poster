@@ -9,12 +9,21 @@
 import Foundation
 import ObjectMapper
 
+let ADD = "ADD"
+let UPDATE = "UPDATE"
+let DELETE = "DELETE"
+
+let POSTER = "POSTER"
+let POSTER_ITEM = "POSTER_ITEM"
+let USER = "USER"
+
+
 let transform = TransformOf<String, AnyObject>(fromJSON: { (value: AnyObject?) -> String? in
     // transform value from String? to Int?
     
-    if value? != nil {
-        var newval = value? as NSDictionary
-        return newval["$oid"] as String!
+    if value != nil {
+        var newval = value as! NSDictionary
+        return newval["$oid"] as! String!
     }
     
     
@@ -35,17 +44,28 @@ class PosterMessage : Mappable {
     var type: String?
     var content: String?
     var action: String?
-    init() {}
+    var userUuid: String?
+    var posterUuid: String?
+    var posterItemId: String?
+    
+    
+    required init() {}
     
     required init?(_ map: Map) {
         mapping(map)
     }
-    
+
+
+
+
     // Mappable
     func mapping(map: Map) {
-        type <- map["type"]
-        content <- map["content"]
-        action <- map["action"]
+        type <= map["type"]
+        content <= map["content"]
+        action <= map["action"]
+        userUuid      <= map["userUuid"]
+        posterUuid      <= map["posterUuid"]
+        posterItemId <= map["posterItemId"]
     }
     
 }
@@ -59,7 +79,7 @@ class User : Mappable, Equatable {
     var nameTags: [String]?
  
     
-    init() {}
+    required init() {}
     
     required init?(_ map: Map) {
         mapping(map)
@@ -70,11 +90,11 @@ class User : Mappable, Equatable {
     
     // Mappable
     func mapping(map: Map) {
-        id      <- (map["_id"], transform)
-        uuid      <- map["uuid"]
-        name    <- map["name"]
-        posters <- map["posters"]
-        nameTags <- map["nameTags"]
+        id      <= (map["_id"], transform)
+        uuid      <= map["uuid"]
+        name    <= map["name"]
+        posters <= map["posters"]
+        nameTags <= map["nameTags"]
     }
     
    
@@ -101,7 +121,7 @@ class Poster : Mappable,  Equatable {
     var posterItems: [String]?
     var name: String?
 
-    init() {}
+    required init() {}
     
     required init?(_ map: Map) {
         mapping(map)
@@ -109,12 +129,12 @@ class Poster : Mappable,  Equatable {
     
     // Mappable
     func mapping(map: Map) {
-        id      <- (map["_id"], transform)
-        uuid          <- map["uuid"]
-        name        <- map["name"]
-        height      <- map["height"]
-        width       <- map["width"]
-        posterItems <- map["posterItems"]
+        id      <= (map["_id"], transform)
+        uuid          <= map["uuid"]
+        name        <= map["name"]
+        height      <= map["height"]
+        width       <= map["width"]
+        posterItems <= map["posterItems"]
     }
 }
 
@@ -132,7 +152,7 @@ class PosterItem : Mappable,  Equatable {
     var type: String?
     var image_bytes: String?
     
-    init() {}
+    required init() {}
     
     required init?(_ map: Map) {
         mapping(map)
@@ -140,17 +160,17 @@ class PosterItem : Mappable,  Equatable {
     
     // Mappable
     func mapping(map: Map) {
-        id      <- (map["_id"], transform)
-        uuid          <- map["uuid"]
-        name        <- map["name"]
-        x           <- map["x"]
-        y           <- map["y"]
-        height      <- map["height"]
-        width       <- map["width"]
-        rotation    <- map["rotation"]
-        content     <- map["content"]
-        type        <- map["type"]
-        image_bytes <- map["imageBytes"]
+        id      <= (map["_id"], transform)
+        uuid          <= map["uuid"]
+        name        <= map["name"]
+        x           <= map["x"]
+        y           <= map["y"]
+        height      <= map["height"]
+        width       <= map["width"]
+        rotation    <= map["rotation"]
+        content     <= map["content"]
+        type        <= map["type"]
+        image_bytes <= map["imageBytes"]
     }
  
 }

@@ -8,17 +8,17 @@
 
 import Foundation
 import UIKit
-import SwiftEventBus
 import CCMPopup
 import Async
 
 class PosterCollectionController :UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     
-    var nameLabels : [String] = ["GROUP 1", "GROUP 2", "GROUP 3","GROUP 4","GROUP 5","GROUP 6","GROUP 7","GROUP 8","GROUP 8"]
+
     var selectedColor: UIColor?
     var selectedUserId: String?
-    var isEditing = false
+    var isDoingEditing = false
+
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet var collectionView: UICollectionView!
@@ -35,6 +35,7 @@ class PosterCollectionController :UIViewController, UICollectionViewDataSource, 
         
         UINavigationBar.appearance().barTintColor = UIColor.paperColorGray600()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         SwiftEventBus.onMainThread(self, name: "PosterReloadedEvent") { _ in
             self.reloadWithDBHelper()
@@ -59,13 +60,14 @@ class PosterCollectionController :UIViewController, UICollectionViewDataSource, 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "posterItemSegue"{
-            let vc = segue.destinationViewController as PosterItemCollectionController
-            let cell = sender as UserCell
+            let vc = segue.destinationViewController as! PosterItemCollectionController
+            let cell = sender as! PosterCell
             let poster = DBHelper.sharedMonitor().fetchPostersWithUser(selectedUserId!).filter({ $0.name == cell.title.text }).first!
+            DBHelper.sharedMonitor().posterMessageBuilder.posterUuid = poster.uuid
             vc.selectedPosterId = poster.uuid
             vc.selectedColor = cell.backgroundColor
         } else if segue.identifier == "addPosterSegue" {
-            var popupSegue : CCMPopupSegue = segue as CCMPopupSegue
+            var popupSegue : CCMPopupSegue = segue as! CCMPopupSegue
             if self.view.bounds.size.height < 420 {
                 popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
             } else {
@@ -87,12 +89,13 @@ class PosterCollectionController :UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell : UserCell = collectionView.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as UserCell
+        var cell : PosterCell = collectionView.dequeueReusableCellWithReuseIdentifier("PosterCell", forIndexPath: indexPath) as! PosterCell
         let color = UIColor.paperColorTeal400()
         var poster = DBHelper.sharedMonitor().fetchPostersWithUser(selectedUserId!)[indexPath.row]
+        cell.nameTags.text = "\(poster.posterItems!.count) Poster Items"
         cell.title.text = poster.name
         cell.removeButton.tag = indexPath.row
-        cell.removeButton.hidden = !isEditing
+        cell.removeButton.hidden = !isDoingEditing
         cell.backgroundColor = color
         return cell
         
@@ -100,11 +103,11 @@ class PosterCollectionController :UIViewController, UICollectionViewDataSource, 
     
     
     @IBAction func toggleEditMode(sender: UIBarButtonItem) {
-        if isEditing == false {
-            isEditing = true
+        if isDoingEditing == false {
+            isDoingEditing = true
             sender.tintColor = UIColor.paperColorRed()
         } else {
-            isEditing = false
+            isDoingEditing = false
             sender.tintColor = UIColor.paperColorBlue400()
         }
         self.reloadWithDBHelper()
@@ -137,7 +140,7 @@ class PosterCollectionController :UIViewController, UICollectionViewDataSource, 
                     }.main{
                         self.collectionView.deleteItemsAtIndexPaths([indexPath])
                         self.collectionView.reloadData()
-                        self.isEditing = false
+                        self.isDoingEditing = false
                         self.editButton.tintColor = UIColor.paperColorBlue400()
                         SweetAlert().showAlert("Deleted!", subTitle: "", style: AlertStyle.Success)
                     }
@@ -154,12 +157,12 @@ class PosterCollectionController :UIViewController, UICollectionViewDataSource, 
     
     
     @IBAction func popoverCancelButton(segue:UIStoryboardSegue) {
-        var addController = segue.sourceViewController as AddPosterController
+        var addController = segue.sourceViewController as! AddPosterController
         addController.dismissAnimated()
     }
     
     @IBAction func popoverAddButton(segue:UIStoryboardSegue) {
-        var addController = segue.sourceViewController as AddPosterController
+        var addController = segue.sourceViewController as! AddPosterController
         
         addController.dismissViewControllerAnimated(true, completion: {
             
@@ -193,7 +196,7 @@ class PosterCollectionController :UIViewController, UICollectionViewDataSource, 
     }
 
     @IBAction func onBurger() {
-        (tabBarController as TabBarController).sidebar.showInViewController(self, animated: true)
+        (tabBarController as! TabBarController).sidebar.showInViewController(self, animated: true)
     }
     
 }
