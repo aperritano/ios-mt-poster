@@ -28,7 +28,6 @@
 		704876FE1AC322AA0037FD48 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704876FD1AC322AA0037FD48 /* PosterCell.swift */; };
 		707404581AB0D67900FE6943 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707404571AB0D67900FE6943 /* DBHelper.swift */; };
 		70B77EEE1AB4682F00A2DAC3 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B77EED1AB4682F00A2DAC3 /* UserCollectionViewController.swift */; };
-		70B77EF61AB46CA300A2DAC3 /* 220.png in Resources */ = {isa = PBXBuildFile; fileRef = 70B77EF51AB46CA300A2DAC3 /* 220.png */; };
 		70E020581AA21039007968CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E020571AA21039007968CF /* AppDelegate.swift */; };
 		70E0205B1AA21039007968CF /* ios_mt_poster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70E020591AA21039007968CF /* ios_mt_poster.xcdatamodeld */; };
 		70E020621AA21039007968CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70E020611AA21039007968CF /* Images.xcassets */; };
@@ -93,7 +92,6 @@
 		704876FD1AC322AA0037FD48 /* PosterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
 		707404571AB0D67900FE6943 /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		70B77EED1AB4682F00A2DAC3 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
-		70B77EF51AB46CA300A2DAC3 /* 220.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 220.png; sourceTree = "<group>"; };
 		70E020521AA21039007968CF /* PosterKit Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PosterKit Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E020561AA21039007968CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70E020571AA21039007968CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -219,8 +217,8 @@
 		70E020491AA21039007968CF = {
 			isa = PBXGroup;
 			children = (
-				70E020541AA21039007968CF /* ios-mt-poster */,
-				70E0206D1AA21039007968CF /* ios-mt-posterTests */,
+				70E020541AA21039007968CF /* PosterKit Admin */,
+				70E0206D1AA21039007968CF /* PosterKit Admin */,
 				70E020531AA21039007968CF /* Products */,
 				95A3D0D8EC3EA336AB151717 /* Pods */,
 				41927CA4B75FBAA85AE29954 /* Frameworks */,
@@ -235,7 +233,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		70E020541AA21039007968CF /* ios-mt-poster */ = {
+		70E020541AA21039007968CF /* PosterKit Admin */ = {
 			isa = PBXGroup;
 			children = (
 				700120291AC309EE001B7A2B /* SwiftEventBus.swift */,
@@ -247,6 +245,7 @@
 				702CF6A01AB1348D00474DA2 /* Model */,
 				C0A7D559A40120F04593FED3 /* Networking */,
 			);
+			name = "PosterKit Admin";
 			path = "ios-mt-poster";
 			sourceTree = "<group>";
 		};
@@ -254,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				70F4CE161AB6415900ACB0D0 /* icon2.png */,
-				70B77EF51AB46CA300A2DAC3 /* 220.png */,
 				70E020611AA21039007968CF /* Images.xcassets */,
 				70E020591AA21039007968CF /* ios_mt_poster.xcdatamodeld */,
 				70E0207D1AA21A87007968CF /* ios-mt-poster-Bridging-Header.h */,
@@ -264,12 +262,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		70E0206D1AA21039007968CF /* ios-mt-posterTests */ = {
+		70E0206D1AA21039007968CF /* PosterKit Admin */ = {
 			isa = PBXGroup;
 			children = (
 				70E020701AA21039007968CF /* ios_mt_posterTests.swift */,
 				70E0206E1AA21039007968CF /* Supporting Files */,
 			);
+			name = "PosterKit Admin";
 			path = "ios-mt-posterTests";
 			sourceTree = "<group>";
 		};
@@ -448,7 +447,6 @@
 				70E7CC831AA37DFD00ED408F /* Roboto-ThinItalic.ttf in Resources */,
 				70E7CC841AA37DFD00ED408F /* RobotoCondensed-Bold.ttf in Resources */,
 				70E7CC781AA37DFD00ED408F /* Roboto-Black.ttf in Resources */,
-				70B77EF61AB46CA300A2DAC3 /* 220.png in Resources */,
 				70E020621AA21039007968CF /* Images.xcassets in Resources */,
 				70045E561AB4D1E2000B425A /* burger.png in Resources */,
 				70045E581AB4D1E2000B425A /* gear.png in Resources */,
