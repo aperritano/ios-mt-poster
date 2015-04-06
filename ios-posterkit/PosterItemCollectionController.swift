@@ -54,18 +54,33 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        var popupSegue : CCMPopupSegue = segue as! CCMPopupSegue
-        if self.view.bounds.size.height < 420 {
-            popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
-        } else {
-            popupSegue.destinationBounds = CGRectMake(0, 0, 800, 750)
-        }
+
+        if segue.identifier == "addPosterItemSegue"{
+            var popupSegue : CCMPopupSegue = segue as! CCMPopupSegue
+            if self.view.bounds.size.height < 420 {
+                popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
+            } else {
+                popupSegue.destinationBounds = CGRectMake(0, 0, 600, 620)
+            }
             popupSegue.backgroundBlurRadius = 7
             popupSegue.backgroundViewAlpha = 0.9
             popupSegue.backgroundViewColor = UIColor.paperColorGray400()
             popupSegue.dismissableByTouchingBackground = true
             self.popupController = popupSegue.destinationViewController as? AddPosterItemController
+
+        } else  if segue.identifier == "addTextSegue"{
+            var popupSegue : CCMPopupSegue = segue as! CCMPopupSegue
+            if self.view.bounds.size.height < 420 {
+                popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
+            } else {
+                popupSegue.destinationBounds = CGRectMake(0, 0, 600, 400)
+            }
+            popupSegue.backgroundBlurRadius = 7
+            popupSegue.backgroundViewAlpha = 0.9
+            popupSegue.backgroundViewColor = UIColor.paperColorGray400()
+            popupSegue.dismissableByTouchingBackground = true
+           // self.popupController = popupSegue.destinationViewController as? AddTextPosterItemController
+        }
 
         
     }
@@ -108,114 +123,100 @@ class PosterItemCollectionController : UIViewController, UICollectionViewDataSou
     
     
     @IBAction func popoverCancelButton(segue:UIStoryboardSegue) {
-         var posterItemController = segue.sourceViewController as! AddPosterItemController
-        posterItemController.dismissAnimated()
+
+        if let posterItemController = segue.sourceViewController as? AddPosterItemController {
+            posterItemController.dismissAnimated()
+        } else if let posterItemController = segue.sourceViewController as? AddPosterItemController {
+            posterItemController.dismissAnimated()
+        }
+
     }
-    
-    @IBAction func popoverAddButton(segue:UIStoryboardSegue) {
-        var addPosterItemController = segue.sourceViewController as! AddPosterItemController
-        addPosterItemController.dismissViewControllerAnimated(true, completion: {
-            
-            var mqttPosterItems = [PosterItem]()
-            var selectedPoster = DBHelper.sharedMonitor().fetchPoster(self.selectedPosterId!)
-            if let titleMessage = addPosterItemController.titleField.text {
-                var posterItem  = PosterItem()
-                posterItem.uuid = NSUUID().UUIDString
-                posterItem.x = 500
-                posterItem.y = 500
-                posterItem.width = 500
-                posterItem.height = 500
-                posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
-                posterItem.type = "txt"
-                posterItem.content = titleMessage
-                selectedPoster?.posterItems?.append(posterItem.uuid!)
-                mqttPosterItems.append(posterItem)
-                Async.background {
-                    DBHelper.sharedMonitor().createPosterItem(posterItem)
-                }
-                
-                
-            }
-        
-            if let captionMessage = addPosterItemController.captionTextField.text {
-                var posterItem  = PosterItem()
-                posterItem.uuid = NSUUID().UUIDString
-                posterItem.x = 500
-                posterItem.y = 500
-                posterItem.width = 500
-                posterItem.height = 500
-                posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
-                posterItem.type = "txt"
-                posterItem.content = captionMessage
-                selectedPoster?.posterItems?.append(posterItem.uuid!)
-                mqttPosterItems.append(posterItem)
-                Async.background {
-                    DBHelper.sharedMonitor().createPosterItem(posterItem)
+
+    @IBAction func popoverAddTextButton(segue:UIStoryboardSegue) {
+        if let addPosterItemController = segue.sourceViewController as? AddTextPosterItemController {
+            addPosterItemController.dismissViewControllerAnimated(true, completion: {
+
+                var mqttPosterItems = [PosterItem]()
+                var selectedPoster = DBHelper.sharedMonitor().fetchPoster(self.selectedPosterId!)
+                if let titleMessage = addPosterItemController.posterNameTextField.text {
+                    var posterItem  = PosterItem()
+                    posterItem.uuid = NSUUID().UUIDString
+                    posterItem.x = 500
+                    posterItem.y = 500
+                    posterItem.width = 500
+                    posterItem.height = 500
+                    posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
+                    posterItem.type = "txt"
+                    posterItem.content = titleMessage
+                    selectedPoster?.posterItems?.append(posterItem.uuid!)
+                    mqttPosterItems.append(posterItem)
+                    Async.background {
+                        DBHelper.sharedMonitor().createPosterItem(posterItem)
+                    }
+
+
                 }
 
-                
-            }
-            
-            if let imageData = UIImagePNGRepresentation(addPosterItemController.posterImageView.image) {
-                let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
 
-                var posterItem  = PosterItem()
-                posterItem.uuid = NSUUID().UUIDString
-                posterItem.x = 500
-                posterItem.y = 500
-                posterItem.width = 500
-                posterItem.height = 500
-                posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
-                posterItem.type = "img"
-                posterItem.content = "image"
-                posterItem.image_bytes = base64String
-               // posterItem.image_id = "png"
-                selectedPoster?.posterItems?.append(posterItem.uuid!)
 
-                mqttPosterItems.append(posterItem)
+
+
                 Async.background {
-                    DBHelper.sharedMonitor().createPosterItem(posterItem)
+
+
+                    DBHelper.sharedMonitor().updatePoster(selectedPoster!)
+
+                }
+            })
+        }
+
+    }
+
+
+
+
+@IBAction func popoverAddButton(segue:UIStoryboardSegue) {
+        if let addPosterItemController = segue.sourceViewController as? AddPosterItemController {
+            addPosterItemController.dismissViewControllerAnimated(true, completion: {
+
+                var mqttPosterItems = [PosterItem]()
+                var selectedPoster = DBHelper.sharedMonitor().fetchPoster(self.selectedPosterId!)
+
+                if let imageData = UIImagePNGRepresentation(addPosterItemController.posterImageView.image) {
+                    let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
+
+                    var posterItem  = PosterItem()
+                    posterItem.uuid = NSUUID().UUIDString
+                    posterItem.x = 500
+                    posterItem.y = 500
+                    posterItem.width = 500
+                    posterItem.height = 500
+                    posterItem.name = "PI-\(Int(arc4random_uniform(50)))"
+                    posterItem.type = "img"
+                    posterItem.content = "image"
+                    posterItem.image_bytes = base64String
+                    // posterItem.image_id = "png"
+                    selectedPoster?.posterItems?.append(posterItem.uuid!)
+
+                    mqttPosterItems.append(posterItem)
+                    Async.background {
+                        DBHelper.sharedMonitor().createPosterItem(posterItem)
+                    }
+
                 }
 
-            }
-            
-            
-            
-            Async.background {
-                
 
-                DBHelper.sharedMonitor().updatePoster(selectedPoster!)
-                
-            }
 
-            
-//                Async.background {
-//                
-//                    for pi in mqttPosterItems {
-//                        var message = PosterMessage()
-//                        message.type = "posterItem"
-//                        message.action = "add"
-//                        let JSONString = Mapper().toJSONString(pi, prettyPrint: false)
-//                        message.content = JSONString
-//                        
-//                        let JSONSMessage = Mapper().toJSONString(message, prettyPrint: false)
-//                        
-//                        MQTTPipe.sharedInstance.sendMessage(JSONSMessage)
-//                    }
-//                    
-//                    
-//                }
-            
-        
-        
+                Async.background {
 
-        
-        
-        
-            
-            
-        
-        })
+
+                    DBHelper.sharedMonitor().updatePoster(selectedPoster!)
+
+                }
+
+            })
+        }
+
     }
     
 

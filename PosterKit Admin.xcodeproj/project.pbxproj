@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7001183C1AD345FC0093DA84 /* ic_image_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 7001183A1AD345FC0093DA84 /* ic_image_black_24dp.png */; };
+		7001183D1AD345FC0093DA84 /* ic_image_black_48dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 7001183B1AD345FC0093DA84 /* ic_image_black_48dp.png */; };
 		7001202A1AC309EE001B7A2B /* SwiftEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700120291AC309EE001B7A2B /* SwiftEventBus.swift */; };
 		70045E3E1AB48C74000B425A /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70045E3D1AB48C74000B425A /* UserCell.swift */; };
 		70045E401AB48FA7000B425A /* PosterCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70045E3F1AB48FA7000B425A /* PosterCollectionController.swift */; };
@@ -66,12 +68,15 @@
 		70FDC07B1AB509F800A38A81 /* PosterItemCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FDC07A1AB509F800A38A81 /* PosterItemCollectionController.swift */; };
 		70FDC07D1AB50D4700A38A81 /* PosterItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FDC07C1AB50D4700A38A81 /* PosterItemCell.swift */; };
 		8E8C342EE7E29455707E0A2E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CBAD03109F236E356B292F0 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C0A7D3E959F838F01CE1870A /* AddTextPosterItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D858AB2EA2E3372B09EB /* AddTextPosterItemController.swift */; };
 		C0A7D4F72616BF9DFCBE9B76 /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A7D6E5EE7312A743B48A6A /* googleicon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		141A83CC78D6F6DC7BDF46FE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3D459EEF15E3593E36B2C93B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7001183A1AD345FC0093DA84 /* ic_image_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_image_black_24dp.png; sourceTree = "<group>"; };
+		7001183B1AD345FC0093DA84 /* ic_image_black_48dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_image_black_48dp.png; sourceTree = "<group>"; };
 		700120291AC309EE001B7A2B /* SwiftEventBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftEventBus.swift; sourceTree = "<group>"; };
 		70045E3D1AB48C74000B425A /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		70045E3F1AB48FA7000B425A /* PosterCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PosterCollectionController.swift; sourceTree = "<group>"; };
@@ -134,6 +139,7 @@
 		8CBAD03109F236E356B292F0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A7D064A8A7C1C9A74ABF41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C0A7D6E5EE7312A743B48A6A /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file.ttf; path = googleicon.ttf; sourceTree = "<group>"; };
+		C0A7D858AB2EA2E3372B09EB /* AddTextPosterItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTextPosterItemController.swift; sourceTree = "<group>"; };
 		C0A7DE2B3BD295836151BA36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +196,7 @@
 				70FDC07C1AB50D4700A38A81 /* PosterItemCell.swift */,
 				70F4CE051AB62BA700ACB0D0 /* AddPosterItemController.swift */,
 				70FDC07A1AB509F800A38A81 /* PosterItemCollectionController.swift */,
+				C0A7D858AB2EA2E3372B09EB /* AddTextPosterItemController.swift */,
 			);
 			name = PosterItem;
 			sourceTree = "<group>";
@@ -254,6 +261,8 @@
 				70767D061AC336F9006176B5 /* PosterKit Admin.entitlements */,
 				70F4CE161AB6415900ACB0D0 /* icon2.png */,
 				70E020611AA21039007968CF /* Images.xcassets */,
+				7001183A1AD345FC0093DA84 /* ic_image_black_24dp.png */,
+				7001183B1AD345FC0093DA84 /* ic_image_black_48dp.png */,
 				70E020591AA21039007968CF /* ios_mt_poster.xcdatamodeld */,
 				70E0207D1AA21A87007968CF /* ios-mt-poster-Bridging-Header.h */,
 				7090142D1ACB3945005F3B57 /* Info.plist */,
@@ -411,6 +420,7 @@
 				70F4CE171AB6415900ACB0D0 /* icon2.png in Resources */,
 				70E7CC7A1AA37DFD00ED408F /* Roboto-Bold.ttf in Resources */,
 				70E7CC7E1AA37DFD00ED408F /* Roboto-LightItalic.ttf in Resources */,
+				7001183C1AD345FC0093DA84 /* ic_image_black_24dp.png in Resources */,
 				70E7CC861AA37DFD00ED408F /* RobotoCondensed-Italic.ttf in Resources */,
 				70E7CC851AA37DFD00ED408F /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				70E7CC801AA37DFD00ED408F /* Roboto-MediumItalic.ttf in Resources */,
@@ -429,6 +439,7 @@
 				70E7CC881AA37DFD00ED408F /* RobotoCondensed-LightItalic.ttf in Resources */,
 				70E7CC891AA37DFD00ED408F /* RobotoCondensed-Regular.ttf in Resources */,
 				70045E571AB4D1E2000B425A /* burger@2x.png in Resources */,
+				7001183D1AD345FC0093DA84 /* ic_image_black_48dp.png in Resources */,
 				70045E4D1AB4D1D7000B425A /* profile@2x.png in Resources */,
 				70E7CC7F1AA37DFD00ED408F /* Roboto-Medium.ttf in Resources */,
 				70E7CC871AA37DFD00ED408F /* RobotoCondensed-Light.ttf in Resources */,
@@ -524,6 +535,7 @@
 				70045E3E1AB48C74000B425A /* UserCell.swift in Sources */,
 				70430DF91ABF1B6900AB9657 /* AddPosterController.swift in Sources */,
 				702CF69E1AB1347F00474DA2 /* Model.swift in Sources */,
+				C0A7D3E959F838F01CE1870A /* AddTextPosterItemController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,18 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_image_black_48dp.png",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "ic_image_black_48dp1.png",
+      "idiom" : "ipad",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

@@ -218,7 +218,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group 1" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HGa-YE-oSh" numberOfLines="0">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group 1" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HGa-YE-oSh">
                                                     <rect key="frame" x="0.0" y="91" width="334" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -582,10 +582,16 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="hpA-2F-3a1"/>
-                                    <barButtonItem systemItem="add" id="oQD-DW-mTD">
+                                    <barButtonItem image="toolbar_image" id="oQD-DW-mTD" userLabel="Add Image">
                                         <color key="tintColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="yfH-Ed-Mlg" kind="custom" identifier="addPosterItemSegue" customClass="CCMPopupSegue" id="JOW-wq-4dD"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="01l-wb-es6"/>
+                                    <barButtonItem image="toolbar_text" id="dq1-D2-u4P" userLabel="Add Text">
+                                        <connections>
+                                            <segue destination="rsc-eF-JF8" kind="custom" identifier="addTextSegue" customClass="CCMPopupSegue" id="15K-wk-7j0"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -616,11 +622,11 @@
             <objects>
                 <viewController title="AddPosterViewController" id="yfH-Ed-Mlg" customClass="AddPosterItemController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NeE-WI-jmH">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="750"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="kfj-ih-GuQ">
-                                <rect key="frame" x="116" y="148" width="542" height="396"/>
+                                <rect key="frame" x="16" y="92" width="561" height="396"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.043140001599999998" green="0.14117999370000001" blue="0.98430997129999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
@@ -628,26 +634,8 @@
                                     <outletCollection property="gestureRecognizers" destination="gUk-e9-Qpo" appends="YES" id="2He-ar-fZc"/>
                                 </connections>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CAPTION" minimumFontSize="17" id="iOW-xp-j0Q">
-                                <rect key="frame" x="80" y="581" width="640" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="bottomBorderEnabled" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(e.g., GAMMA VIZ)" minimumFontSize="17" id="oql-uq-nRa">
-                                <rect key="frame" x="80" y="74" width="640" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V2B-hx-dQa" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
-                                <rect key="frame" x="739" y="8" width="50" height="45"/>
+                                <rect key="frame" x="534" y="8" width="50" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="icon2.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -656,34 +644,20 @@
                                     <segue destination="tFf-Q9-Z5f" kind="unwind" unwindAction="popoverCancelButton:" id="lng-Na-GgZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LM3-HO-XEc">
-                                <rect key="frame" x="80" y="45" width="37" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hmp-F7-YYb">
-                                <rect key="frame" x="80" y="119" width="53" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h5J-qe-EZH">
-                                <rect key="frame" x="80" y="552" width="66" height="21"/>
+                                <rect key="frame" x="16" y="57" width="53" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TbD-cd-BkV" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
-                                <rect key="frame" x="250" y="639" width="275" height="66"/>
+                                <rect key="frame" x="159" y="516" width="275" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Add Poster Items">
+                                <state key="normal" title="Add Image">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -707,11 +681,9 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="800" height="750"/>
+                    <size key="freeformSize" width="600" height="620"/>
                     <connections>
-                        <outlet property="captionTextField" destination="iOW-xp-j0Q" id="HvW-3U-aH6"/>
                         <outlet property="posterImageView" destination="kfj-ih-GuQ" id="nfE-VY-u0k"/>
-                        <outlet property="titleField" destination="oql-uq-nRa" id="WNE-sC-8Gb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aL4-ic-TGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -724,11 +696,90 @@
             </objects>
             <point key="canvasLocation" x="2593" y="3177"/>
         </scene>
+        <!--Add Text Poster Item Controller-->
+        <scene sceneID="QkK-9n-U9X">
+            <objects>
+                <viewController id="rsc-eF-JF8" customClass="AddTextPosterItemController" customModule="PosterKit_Admin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bd6-qh-N2V">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iTi-Ni-q6Q">
+                                <rect key="frame" x="56" y="43" width="37" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Guh-Uz-t7y">
+                                <rect key="frame" x="56" y="72" width="488" height="225"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">A supermassive black hole (SMBH) is the largest type of black hole, on the order of hundreds of thousands to billions of solar masses. Wikipedia
+Explore: Supermassive black hole
+When mass is concentrated into a sufficiently compact region of space, general relativity predicts the formation of a black hole -- a region of space with a gravitational effect so strong that not even light can escape. Wikipedia
+Explore: General relativity
+Active galactic nuclei (AGN) are galaxies that have very energetic central regions, due to either the presence of a black hole or star formation activity at the core of the galaxy. images.nrao.edu
+Explore: Active galactic nucleus</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TsC-bs-6GN" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
+                                <rect key="frame" x="534" y="11" width="50" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="icon2.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="nmJ-BC-mOx" kind="unwind" unwindAction="popoverCancelButton:" id="k31-V2-qyP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T9m-2K-frS" customClass="MKButton" customModule="PosterKit_Admin" customModuleProvider="target">
+                                <rect key="frame" x="163" y="314" width="275" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.57254901960000004" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Add Text">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="nmJ-BC-mOx" kind="unwind" unwindAction="popoverAddTextButton:" id="LzT-qt-zsa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="400"/>
+                    <connections>
+                        <outlet property="posterNameTextField" destination="Guh-Uz-t7y" id="6np-iB-oFP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="25G-Km-XFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="nmJ-BC-mOx" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3494" y="2970"/>
+        </scene>
     </scenes>
     <resources>
         <image name="angle-mask.png" width="100" height="100"/>
         <image name="burger.png" width="19" height="17"/>
         <image name="icon2.png" width="154" height="154"/>
+        <image name="toolbar_image" width="48" height="48"/>
+        <image name="toolbar_text" width="48" height="48"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

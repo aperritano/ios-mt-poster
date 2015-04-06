@@ -18,9 +18,7 @@ class AddPosterItemController: UIViewController, UIImagePickerControllerDelegate
 
     let tapRecognizer = UITapGestureRecognizer()
     var url : NSURL!
-    
-    @IBOutlet weak var captionTextField: UITextField!
-    @IBOutlet weak var titleField: UITextField!
+
     @IBOutlet weak var posterImageView: UIImageView!
     
 
