@@ -43,7 +43,9 @@ class SweetAlert: UIViewController {
     
     
     convenience init() {
-        self.init()
+        self.init(nibName: nil, bundle: nil)
+        
+    
         
         self.view.frame = UIScreen.mainScreen().bounds
         self.view.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
@@ -557,7 +559,7 @@ class SuccessAnimatedView: AnimatableView {
  
     
     convenience init() {
-        self.init()
+        self.init(frame: CGRectZero)
         self.setupLayers()
         circleLayer.strokeStart = 0.0
         circleLayer.strokeEnd = 0.0

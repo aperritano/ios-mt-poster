@@ -23,7 +23,9 @@ let transform = TransformOf<String, AnyObject>(fromJSON: { (value: AnyObject?) -
     
     if value != nil {
         var newval = value as! NSDictionary
-        return newval["$oid"] as! String!
+        var t = newval["$oid"] as! String!
+        NSLog("ID = \(t)")
+        return t
     }
     
     
@@ -77,7 +79,7 @@ class User : Mappable, Equatable {
     var name: String?
     var posters: [String]?
     var nameTags: [String]?
- 
+    var classname: String?
     
     required init() {}
     
@@ -95,6 +97,7 @@ class User : Mappable, Equatable {
         name    <= map["name"]
         posters <= map["posters"]
         nameTags <= map["nameTags"]
+        classname <= map["classname"]
     }
     
    

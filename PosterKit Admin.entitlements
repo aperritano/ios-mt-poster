@@ -2,13 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>70E020511AA21039007968CF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.evl.ltg.uic.edu.PosterKit</string>
+	</array>
 </dict>
 </plist>

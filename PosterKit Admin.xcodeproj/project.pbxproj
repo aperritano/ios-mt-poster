@@ -22,11 +22,14 @@
 		70045E591AB4D1E2000B425A /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70045E531AB4D1E2000B425A /* gear@2x.png */; };
 		70045E5A1AB4D1E2000B425A /* globe.png in Resources */ = {isa = PBXBuildFile; fileRef = 70045E541AB4D1E2000B425A /* globe.png */; };
 		70045E5B1AB4D1E2000B425A /* globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70045E551AB4D1E2000B425A /* globe@2x.png */; };
+		700E6CA01ACB3845002A9708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A7D7FAE179EF54C5999E2D /* Main.storyboard */; };
+		700E6CA11ACB3848002A9708 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0A7D80223A5E48B580E906E /* LaunchScreen.xib */; };
 		702CF69E1AB1347F00474DA2 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702CF69D1AB1347F00474DA2 /* Model.swift */; };
 		70430DF91ABF1B6900AB9657 /* AddPosterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70430DF81ABF1B6900AB9657 /* AddPosterController.swift */; };
 		70430DFE1ABF6D2C00AB9657 /* MQTTPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70430DFD1ABF6D2C00AB9657 /* MQTTPipe.swift */; };
 		704876FE1AC322AA0037FD48 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704876FD1AC322AA0037FD48 /* PosterCell.swift */; };
 		707404581AB0D67900FE6943 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707404571AB0D67900FE6943 /* DBHelper.swift */; };
+		7090142E1ACB3945005F3B57 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7090142D1ACB3945005F3B57 /* Info.plist */; };
 		70B77EEE1AB4682F00A2DAC3 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B77EED1AB4682F00A2DAC3 /* UserCollectionViewController.swift */; };
 		70E020581AA21039007968CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E020571AA21039007968CF /* AppDelegate.swift */; };
 		70E0205B1AA21039007968CF /* ios_mt_poster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70E020591AA21039007968CF /* ios_mt_poster.xcdatamodeld */; };
@@ -63,9 +66,7 @@
 		70FDC07B1AB509F800A38A81 /* PosterItemCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FDC07A1AB509F800A38A81 /* PosterItemCollectionController.swift */; };
 		70FDC07D1AB50D4700A38A81 /* PosterItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FDC07C1AB50D4700A38A81 /* PosterItemCell.swift */; };
 		8E8C342EE7E29455707E0A2E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CBAD03109F236E356B292F0 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		C0A7D0B1E4C04FD2678D140F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0A7D80223A5E48B580E906E /* LaunchScreen.xib */; };
 		C0A7D4F72616BF9DFCBE9B76 /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A7D6E5EE7312A743B48A6A /* googleicon.ttf */; };
-		C0A7DF52297905A6955A2087 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A7D7FAE179EF54C5999E2D /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,14 +92,13 @@
 		70430DFD1ABF6D2C00AB9657 /* MQTTPipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQTTPipe.swift; sourceTree = "<group>"; };
 		704876FD1AC322AA0037FD48 /* PosterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
 		707404571AB0D67900FE6943 /* DBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		70767D061AC336F9006176B5 /* PosterKit Admin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PosterKit Admin.entitlements"; sourceTree = SOURCE_ROOT; };
+		7090142D1ACB3945005F3B57 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70B77EED1AB4682F00A2DAC3 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
 		70E020521AA21039007968CF /* PosterKit Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PosterKit Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		70E020561AA21039007968CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70E020571AA21039007968CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70E0205A1AA21039007968CF /* ios_mt_poster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ios_mt_poster.xcdatamodel; sourceTree = "<group>"; };
 		70E020611AA21039007968CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		70E0206F1AA21039007968CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		70E020701AA21039007968CF /* ios_mt_posterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_mt_posterTests.swift; sourceTree = "<group>"; };
 		70E0207D1AA21A87007968CF /* ios-mt-poster-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-mt-poster-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		70E7CC661AA37DFD00ED408F /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		70E7CC671AA37DFD00ED408F /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -218,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				70E020541AA21039007968CF /* PosterKit Admin */,
-				70E0206D1AA21039007968CF /* PosterKit Admin */,
 				70E020531AA21039007968CF /* Products */,
 				95A3D0D8EC3EA336AB151717 /* Pods */,
 				41927CA4B75FBAA85AE29954 /* Frameworks */,
@@ -246,36 +245,19 @@
 				C0A7D559A40120F04593FED3 /* Networking */,
 			);
 			name = "PosterKit Admin";
-			path = "ios-mt-poster";
+			path = "ios-posterkit";
 			sourceTree = "<group>";
 		};
 		70E020551AA21039007968CF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				70767D061AC336F9006176B5 /* PosterKit Admin.entitlements */,
 				70F4CE161AB6415900ACB0D0 /* icon2.png */,
 				70E020611AA21039007968CF /* Images.xcassets */,
 				70E020591AA21039007968CF /* ios_mt_poster.xcdatamodeld */,
 				70E0207D1AA21A87007968CF /* ios-mt-poster-Bridging-Header.h */,
-				70E020561AA21039007968CF /* Info.plist */,
+				7090142D1ACB3945005F3B57 /* Info.plist */,
 				70E7CC631AA37DDC00ED408F /* Fonts */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		70E0206D1AA21039007968CF /* PosterKit Admin */ = {
-			isa = PBXGroup;
-			children = (
-				70E020701AA21039007968CF /* ios_mt_posterTests.swift */,
-				70E0206E1AA21039007968CF /* Supporting Files */,
-			);
-			name = "PosterKit Admin";
-			path = "ios-mt-posterTests";
-			sourceTree = "<group>";
-		};
-		70E0206E1AA21039007968CF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				70E0206F1AA21039007968CF /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -394,6 +376,11 @@
 					70E020511AA21039007968CF = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = YD334HZ49B;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -430,6 +417,7 @@
 				70045E5A1AB4D1E2000B425A /* globe.png in Resources */,
 				70E7CC7C1AA37DFD00ED408F /* Roboto-Italic.ttf in Resources */,
 				70045E4F1AB4D1D7000B425A /* star@2x.png in Resources */,
+				7090142E1ACB3945005F3B57 /* Info.plist in Resources */,
 				70045E591AB4D1E2000B425A /* gear@2x.png in Resources */,
 				70E7CC7D1AA37DFD00ED408F /* Roboto-Light.ttf in Resources */,
 				70045E4C1AB4D1D7000B425A /* profile.png in Resources */,
@@ -451,8 +439,8 @@
 				70045E561AB4D1E2000B425A /* burger.png in Resources */,
 				70045E581AB4D1E2000B425A /* gear.png in Resources */,
 				C0A7D4F72616BF9DFCBE9B76 /* googleicon.ttf in Resources */,
-				C0A7D0B1E4C04FD2678D140F /* LaunchScreen.xib in Resources */,
-				C0A7DF52297905A6955A2087 /* Main.storyboard in Resources */,
+				700E6CA11ACB3848002A9708 /* LaunchScreen.xib in Resources */,
+				700E6CA01ACB3845002A9708 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +583,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "/Users/aperritano/Box Sync/dev (aperri3@uic.edu)/research/poster/ios-mt-poster/ios-posterkit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -633,6 +622,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "/Users/aperritano/Box Sync/dev (aperri3@uic.edu)/research/poster/ios-mt-poster/ios-posterkit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -648,12 +638,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "PosterKit Admin.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXCLUDED_SOURCE_FILE_NAMES = "";
-				INFOPLIST_FILE = "ios-mt-poster/Info.plist";
+				INFOPLIST_FILE = "ios-posterkit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "PosterKit Admin";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ios-mt-poster-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -665,12 +658,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "PosterKit Admin.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXCLUDED_SOURCE_FILE_NAMES = "FLEX*";
-				INFOPLIST_FILE = "ios-mt-poster/Info.plist";
+				INFOPLIST_FILE = "ios-posterkit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "PosterKit Admin";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ios-mt-poster-Bridging-Header.h";
 			};
 			name = Release;

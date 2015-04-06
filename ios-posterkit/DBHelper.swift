@@ -406,11 +406,12 @@ class DBHelper: NSObject {
     
     func fetchPostersWithUser(user: User) -> [Poster] {
 
+        NSLog("fetchPwiU \(user.id) (user.uuid)")
         var filteredPosters = [Poster]()
 
-        if let userPosters = user.posters {
+        if var userPosters = user.posters {
             for userPosterId in userPosters as [String]! {
-                if let userPoster = (allPosters.filter(){ $0.uuid == userPosterId }.first) {
+                if var userPoster = (allPosters.filter(){ $0.uuid == userPosterId }.first) {
                     filteredPosters.append(userPoster)
                 }
             }
@@ -424,10 +425,15 @@ class DBHelper: NSObject {
     func fetchPosterItemsWithPoster(poster: Poster) -> [PosterItem]{
         
         var filteredPosterItems = [PosterItem]()
-        
+
+        NSLog("PosterItems: \(poster.posterItems)")
         for posterItemId in poster.posterItems as [String]! {
-            if let posterItem = (allPosterItems.filter(){ $0.uuid == posterItemId }.first) {
-                filteredPosterItems.append(posterItem)
+
+            for posterItem in allPosterItems {
+                if posterItem.uuid == posterItemId {
+                    NSLog("found posteritem \(posterItemId)")
+                    filteredPosterItems.append(posterItem)
+                }
             }
         }
         
@@ -436,10 +442,14 @@ class DBHelper: NSObject {
     }
     
     func fetchPosterItemsWithPoster(posterId: String) -> [PosterItem] {
-        if let found = (allPosters.filter(){ $0.uuid == posterId }.first) {
-            return fetchPosterItemsWithPoster(found)
+
+        for poster in allPosters {
+            if poster.uuid == posterId {
+                NSLog("FOUND poster with posterId \(posterId)")
+                return fetchPosterItemsWithPoster(poster)
+            }
         }
-        
+
         return []
     }
     

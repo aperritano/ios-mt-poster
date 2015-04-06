@@ -12,9 +12,9 @@ import UIColor_BFPaperColors
 import ObjectMapper
 import CCMPopup
 import Async
+import WYPopoverController
 
-
-class UserCollectionViewController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class UserCollectionViewController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, WYPopoverControllerDelegate {
     
     
     @IBOutlet var collectionView: UICollectionView!
@@ -50,6 +50,7 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        collectionView.collectionViewLayout.invalidateLayout()
         return DBHelper.sharedMonitor().allUsers.count
     }
     
@@ -58,19 +59,32 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
          return UIEdgeInsetsMake(5, 5, 5, 5);
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell : UserCell = collectionView.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
-        let color = colors[indexPath.row]
-        var foundUser = DBHelper.sharedMonitor().allUsers[indexPath.row];
-        cell.title.text = foundUser.name
-        
-        if( foundUser.nameTags != nil)  {
-            cell.nameTags.text = ",".join(foundUser.nameTags!)
-        }
+        NSLog("cell path \(indexPath.row)")
 
-        cell.removeButton.hidden = !isDoingEdits
-        cell.removeButton.tag = indexPath.row;
-        cell.backgroundColor = color
+        var itemNumber = indexPath.item
+
+        var cell : UserCell = collectionView.dequeueReusableCellWithReuseIdentifier("UserCell", forIndexPath: indexPath) as! UserCell
+        let color = UIColor.paperColorBlue500()
+        var foundUser: User? = DBHelper.sharedMonitor().allUsers[indexPath.row];
+        
+        if let goodUser = foundUser {
+            cell.title.text = goodUser.name
+            
+            if( goodUser.nameTags != nil)  {
+                cell.nameTags.text = ",".join(goodUser.nameTags!)
+            }
+            
+            cell.removeButton.hidden = !isDoingEdits
+            cell.removeButton.tag = indexPath.row;
+            cell.backgroundColor = color
+        }
+      //  NSLog("cell is \(cell) with \(indexPath.row)")
         return cell
     }
     
@@ -83,17 +97,26 @@ class UserCollectionViewController : UIViewController, UICollectionViewDataSourc
             vc.selectedUserId = user.uuid
             vc.selectedColor = cell.backgroundColor                    
         } else if segue.identifier == "addUserSegue" {
-            var popupSegue : CCMPopupSegue = segue as! CCMPopupSegue
+
+//            var popoverSegue : WYStoryboardPopoverSegue = segue as! WYStoryboardPopoverSegue
+//            var vc = segue.destinationViewController as! AddUserController
+//            vc.preferredContentSize =  CGSizeMake(650, 350)
+//            popupController  =  popoverSegue.popoverControllerWithSender(sender, permittedArrowDirections:WYPopoverArrowDirection.Any, animated:true)
+//
+//popoverController = [popoverSegue popoverControllerWithSender:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
+//popoverController.delegate = self;
+
+            var popoverSegue: CCMPopupSegue = segue as! CCMPopupSegue
             if self.view.bounds.size.height < 420 {
-                popupSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
+                popoverSegue.destinationBounds = CGRectMake(0, 0, ((UIScreen.mainScreen().bounds.size.height-20) * 0.75), (UIScreen.mainScreen().bounds.size.height-20))
             } else {
-                popupSegue.destinationBounds = CGRectMake(0, 0, 650, 350)
+                popoverSegue.destinationBounds = CGRectMake(0, 0, 650, 350)
             }
-            popupSegue.backgroundBlurRadius = 7
-            popupSegue.backgroundViewAlpha = 0.9
-            popupSegue.backgroundViewColor = UIColor.paperColorGray400()
-            popupSegue.dismissableByTouchingBackground = true
-            self.popupController = popupSegue.destinationViewController as? AddUserController
+            popoverSegue.backgroundBlurRadius = 7
+            popoverSegue.backgroundViewAlpha = 0.9
+            popoverSegue.backgroundViewColor = UIColor.paperColorGray400()
+            popoverSegue.dismissableByTouchingBackground = true
+            self.popupController = popoverSegue.destinationViewController as? AddUserController
 
         }
     }
