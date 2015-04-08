@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-class AddPosterController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
-    
-    @IBOutlet var posterNameTextField : UITextField!
-    
-    
+class AddPosterController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+
+    @IBOutlet var posterNameTextField: UITextField!
+
+
     @IBOutlet weak var addMaterialButton: MKButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         posterNameTextField.becomeFirstResponder()
     }
-    
+
 }

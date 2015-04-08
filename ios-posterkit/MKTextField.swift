@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 
 @IBDesignable
-public class MKTextField : UITextField {
+public class MKTextField: UITextField {
     @IBInspectable public var padding: CGSize = CGSize(width: 5, height: 5)
     @IBInspectable public var floatingLabelBottomMargin: CGFloat = 2.0
     @IBInspectable public var floatingPlaceholderEnabled: Bool = false
@@ -145,7 +145,7 @@ public class MKTextField : UITextField {
     override public func textRectForBounds(bounds: CGRect) -> CGRect {
         let rect = super.textRectForBounds(bounds)
         var newRect = CGRect(x: rect.origin.x + padding.width, y: rect.origin.y,
-            width: rect.size.width - 2*padding.width, height: rect.size.height)
+                width: rect.size.width - 2 * padding.width, height: rect.size.height)
 
         if !floatingPlaceholderEnabled {
             return newRect
@@ -168,23 +168,23 @@ public class MKTextField : UITextField {
         var originX = textRect.origin.x
         switch textAlignment {
         case .Center:
-            originX += textRect.size.width/2 - floatingLabel.bounds.width/2
+            originX += textRect.size.width / 2 - floatingLabel.bounds.width / 2
         case .Right:
             originX += textRect.size.width - floatingLabel.bounds.width
         default:
             break
         }
         floatingLabel.frame = CGRect(x: originX, y: padding.height,
-            width: floatingLabel.frame.size.width, height: floatingLabel.frame.size.height)
+                width: floatingLabel.frame.size.width, height: floatingLabel.frame.size.height)
     }
 
     private func showFloatingLabel() {
         let curFrame = floatingLabel.frame
-        floatingLabel.frame = CGRect(x: curFrame.origin.x, y: bounds.height/2, width: curFrame.width, height: curFrame.height)
+        floatingLabel.frame = CGRect(x: curFrame.origin.x, y: bounds.height / 2, width: curFrame.width, height: curFrame.height)
         UIView.animateWithDuration(0.45, delay: 0.0, options: .CurveEaseOut, animations: {
             self.floatingLabel.alpha = 1.0
             self.floatingLabel.frame = curFrame
-            }, completion: nil)
+        }, completion: nil)
     }
 
     private func hideFloatingLabel() {

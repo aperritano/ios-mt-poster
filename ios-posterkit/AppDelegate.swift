@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
- let colors: [UIColor] = [UIColor.paperColorRed400(), UIColor.paperColorIndigo400(), UIColor.paperColorPink400(), UIColor.paperColorLightBlue400(), UIColor.paperColorAmber400(), UIColor.paperColorOrange400(), UIColor.paperColorBrown400(), UIColor.paperColorTeal400(), UIColor.paperColorPink400(), UIColor.paperColorBlue400(), UIColor.paperColorGray400(), UIColor.paperColorDeepPurple400(), UIColor.paperColorGreen400()]
+let colors: [UIColor] = [UIColor.paperColorRed400(), UIColor.paperColorIndigo400(), UIColor.paperColorPink400(), UIColor.paperColorLightBlue400(), UIColor.paperColorAmber400(), UIColor.paperColorOrange400(), UIColor.paperColorBrown400(), UIColor.paperColorTeal400(), UIColor.paperColorPink400(), UIColor.paperColorBlue400(), UIColor.paperColorGray400(), UIColor.paperColorDeepPurple400(), UIColor.paperColorGreen400()]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,20 +25,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        var navController : UINavigationController = self.window?.rootViewController as UINavigationController
 //        
 //        navController.navigationBarClas
-        
-        
-        
-        
+
+
+
+
         //UIApplication.sharedApplication().statusBarStyle = .LightContent
 
-       //FLEXManager.sharedManager().showExplorer()
+        //FLEXManager.sharedManager().showExplorer()
 
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()];
 ////
         UINavigationBar.appearance().barTintColor = UIColor.paperColorGray600()
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
 //
-       UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
 ////
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 //        // Override point for customization after application launch.
@@ -71,6 +71,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
     }
 
-  
+
 }
 

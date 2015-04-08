@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MKTableViewCell : UITableViewCell {
+public class MKTableViewCell: UITableViewCell {
     @IBInspectable public var rippleLocation: MKRippleLocation = .TapLocation {
         didSet {
             mkLayer.rippleLocation = rippleLocation
@@ -42,9 +42,9 @@ public class MKTableViewCell : UITableViewCell {
         super.init(coder: aDecoder)
         setupLayer()
     }
-    
+
     convenience init() {
-        self.init(frame:CGRectZero)
+        self.init(frame: CGRectZero)
     }
 
     convenience init(frame: CGRect) {
@@ -59,7 +59,7 @@ public class MKTableViewCell : UITableViewCell {
         mkLayer.setCircleLayerColor(rippleLayerColor)
         mkLayer.ripplePercent = 1.2
     }
-    
+
     public override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         if let firstTouch = touches.first as? UITouch {

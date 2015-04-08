@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-class AddUserController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
-    
-    @IBOutlet var userNameTextField : UITextField!
-    @IBOutlet var nameTagTextField : UITextField!
-    @IBOutlet var posterNameTextField : UITextField!
+class AddUserController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    
+    @IBOutlet var userNameTextField: UITextField!
+    @IBOutlet var nameTagTextField: UITextField!
+    @IBOutlet var posterNameTextField: UITextField!
+
+
     @IBOutlet weak var addMaterialButton: MKButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         userNameTextField.becomeFirstResponder()

@@ -9,16 +9,15 @@
 import Foundation
 import BFPaperCollectionViewCell
 
-class PosterItemCell :  BFPaperCollectionViewCell {
-    
+class PosterItemCell: BFPaperCollectionViewCell {
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var removeButton: MKButton!
-    @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var posterImage: UIImageViewAsync!
     @IBOutlet weak var contentLabel: UILabel!
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-    
-    
-    
+
+
 }

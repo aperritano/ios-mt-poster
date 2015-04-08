@@ -11,7 +11,7 @@ import UIKit
 
 class AddTextPosterItemController: UIViewController, UINavigationControllerDelegate {
 
-    @IBOutlet var posterNameTextField : UITextView!
+    @IBOutlet var posterNameTextField: UITextView!
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -21,14 +21,12 @@ class AddTextPosterItemController: UIViewController, UINavigationControllerDeleg
         super.viewDidLoad()
 
     }
-    
 
-    
+
     override func shouldAutorotate() -> Bool {
         return false
     }
-    
 
-    
+
 }
 

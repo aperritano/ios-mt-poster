@@ -510,7 +510,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SDj-0V-Mo3">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SDj-0V-Mo3" customClass="UIImageViewAsync" customModule="PosterKit_Admin" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="334" height="239"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -715,12 +715,12 @@
                                 <rect key="frame" x="56" y="72" width="488" height="225"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">A supermassive black hole (SMBH) is the largest type of black hole, on the order of hundreds of thousands to billions of solar masses. Wikipedia
+                                <string key="text">A supermassive black hole (SMBH) is the largest type of black hole, on the order of hundreds of thousands to billions of solar masses. Wikipedia
 Explore: Supermassive black hole
 When mass is concentrated into a sufficiently compact region of space, general relativity predicts the formation of a black hole -- a region of space with a gravitational effect so strong that not even light can escape. Wikipedia
 Explore: General relativity
 Active galactic nuclei (AGN) are galaxies that have very energetic central regions, due to either the presence of a black hole or star formation activity at the core of the galaxy. images.nrao.edu
-Explore: Active galactic nucleus</mutableString>
+Explore: Active galactic nucleus</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

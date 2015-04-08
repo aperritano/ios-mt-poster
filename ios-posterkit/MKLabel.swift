@@ -60,9 +60,8 @@ public class MKLabel: UILabel {
     private lazy var mkLayer: MKLayer = MKLayer(superLayer: self.layer)
 
 
-    
     convenience public init() {
-        self.init(frame:CGRectZero)
+        self.init(frame: CGRectZero)
         setup()
     }
 
@@ -93,11 +92,11 @@ public class MKLabel: UILabel {
         mkLayer.animateAlphaForBackgroundLayer(backgroundAniTimingFunction, duration: CFTimeInterval(aniDuration))
     }
 
-    
+
     public override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesBegan(touches as Set<NSObject>, withEvent: event)
-        
-        if let firstTouch = touches.first as? UITouch  {
+
+        if let firstTouch = touches.first as? UITouch {
             let location = firstTouch.locationInView(self)
             animateRipple(location: location)
         }

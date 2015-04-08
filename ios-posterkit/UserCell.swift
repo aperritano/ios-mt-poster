@@ -9,21 +9,21 @@
 import Foundation
 import BFPaperCollectionViewCell
 
-class UserCell : BFPaperCollectionViewCell {
-    
+class UserCell: BFPaperCollectionViewCell {
+
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var nameTags: UILabel!
-    
+
     @IBOutlet weak var classLabel: UILabel!
     @IBOutlet weak var removeButton: MKButton!
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-    
+
     @IBAction func DeleteAction(sender: MKButton) {
         println("IM A Delete")
     }
-  
-    
+
+
 }

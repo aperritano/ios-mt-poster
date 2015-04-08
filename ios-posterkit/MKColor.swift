@@ -13,7 +13,7 @@ extension UIColor {
         let red = CGFloat((hex & 0xFF0000) >> 16) / 255.0
         let green = CGFloat((hex & 0xFF00) >> 8) / 255.0
         let blue = CGFloat((hex & 0xFF)) / 255.0
-        self.init(red:red, green:green, blue:blue, alpha:alpha)
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 
     public struct MKColor {
@@ -37,4 +37,5 @@ extension UIColor {
         public static let Grey = UIColor(hex: 0x9E9E9E)
         public static let BlueGrey = UIColor(hex: 0x607D8B)
     }
+
 }

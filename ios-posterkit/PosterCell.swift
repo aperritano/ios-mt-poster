@@ -9,6 +9,6 @@
 import Foundation
 
 
-class PosterCell : UserCell {
-    
+class PosterCell: UserCell {
+
 }

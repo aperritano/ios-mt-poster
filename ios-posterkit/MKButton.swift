@@ -9,8 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class MKButton : UIButton
-{
+public class MKButton: UIButton {
     @IBInspectable public var maskEnabled: Bool = true {
         didSet {
             mkLayer.enableMask(enable: maskEnabled)
@@ -111,7 +110,7 @@ public class MKButton : UIButton
             //if mkType == .Flat {
             //    mkLayer.animateMaskLayerShadow()
             //} else {
-                mkLayer.animateSuperLayerShadow(10, toRadius: shadowRadius, fromOpacity: 0, toOpacity: shadowOpacity, timingFunction: shadowAniTimingFunction, duration: CFTimeInterval(aniDuration))
+            mkLayer.animateSuperLayerShadow(10, toRadius: shadowRadius, fromOpacity: 0, toOpacity: shadowOpacity, timingFunction: shadowAniTimingFunction, duration: CFTimeInterval(aniDuration))
             //}
         }
 

@@ -9,8 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class MKImageView: UIImageView
-{
+public class MKImageView: UIImageView {
     @IBInspectable public var maskEnabled: Bool = true {
         didSet {
             mkLayer.enableMask(enable: maskEnabled)
