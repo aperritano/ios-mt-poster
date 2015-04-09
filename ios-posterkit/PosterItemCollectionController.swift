@@ -107,7 +107,7 @@ class PosterItemCollectionController: UIViewController, UICollectionViewDataSour
             if let url = posterItem.content {
                 cell.posterImage.downloadImage(url)
             } else {
-                UIHelper.getHelp().showAlert(self, message: "the url for image was nil")
+                UIHelper.showAlert(self, message: "the url for image was nil")
             }
         }
         cell.removeButton.hidden = !isDoingEditing
@@ -182,6 +182,10 @@ class PosterItemCollectionController: UIViewController, UICollectionViewDataSour
 
 
     @IBAction func popoverAddButton(segue: UIStoryboardSegue) {
+        
+        var links = ["http://25.media.tumblr.com/tumblr_m6vzp8nKQk1rx06nvo1_r2_500.jpg", "https://pbs.twimg.com/media/BcvmxibIYAAH8a3.jpg:large", "http://static.ddmcdn.com/gif/storymaker-photos-sharks-in-space-shark-week-1108040-515x344.jpg", "http://images.nationalgeographic.com/wpf/media-live/photos/000/594/cache/best-astro-photographs-space-pictures-2012-ngc-6960_59489_600x450.jpg"]
+        
+        
         if let addPosterItemController = segue.sourceViewController as? AddPosterItemController {
             addPosterItemController.dismissViewControllerAnimated(true, completion: {
 
@@ -199,29 +203,37 @@ class PosterItemCollectionController: UIViewController, UICollectionViewDataSour
                     posterItem.height = 500
                     posterItem.name = "pi\(Int(arc4random_uniform(50))).png"
                     posterItem.type = "img"
-                    posterItem.content = "image"
-                    posterItem.image_bytes = base64String
+                    posterItem.content = links[Int(arc4random_uniform(3))]
+                    //posterItem.image_bytes = base64String
                     // posterItem.image_id = "png"
                     selectedPoster?.posterItems?.append(posterItem.uuid!)
 
                     mqttPosterItems.append(posterItem)
 
+//                    Async.background {
+////                         DBHelper.sharedMonitor().upload(posterItem, data: imageData)
+//                        
+////                        let net = NetData(pngImage: addPosterItemController.posterImageView.image!, filename: posterItem.name!)
+////
+////                        
+////                        var parameters = [
+////                            "file": net
+////                        ]
+////                       
+////                        var request = DBHelper.sharedMonitor().urlRequestWithComponents("http://localhost:2596/", parameters: parameters )
+////                        DBHelper.sharedMonitor().uploadRequestWithProgress(request)
+//                        
+//                             
+//                        
+//                        //DBHelper.sharedMonitor().uploadRequestWithProgress(posterItem, data: imageData)
+//                    }
                     Async.background {
-//                         DBHelper.sharedMonitor().upload(posterItem, data: imageData)
-                        DBHelper.sharedMonitor().uploadRequestWithProgress(posterItem, data: imageData)
-                    }
-                    Async.background {
-                        //DBHelper.sharedMonitor().createPosterItem(posterItem)
+                        DBHelper.sharedMonitor().createPosterItem(posterItem)
+                    }.background {
+                        DBHelper.sharedMonitor().updatePoster(selectedPoster!)
                     }
 
                 }
-
-
-
-                Async.background {
-                    //DBHelper.sharedMonitor().updatePoster(selectedPoster!)
-                }
-
             })
         }
 

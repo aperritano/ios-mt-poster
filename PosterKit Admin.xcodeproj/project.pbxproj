@@ -73,6 +73,7 @@
 		C0A7D3E959F838F01CE1870A /* AddTextPosterItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D858AB2EA2E3372B09EB /* AddTextPosterItemController.swift */; };
 		C0A7D4F72616BF9DFCBE9B76 /* googleicon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0A7D6E5EE7312A743B48A6A /* googleicon.ttf */; };
 		C0A7DC232B737D108ACDE53C /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A7DFE0765E655FC6C3D796 /* UIHelper.swift */; };
+		C0A7DDAB53C319D476AADF76 /* FileSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A7DE13153D7E7640715082 /* FileSave.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		7090142D1ACB3945005F3B57 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70B77EED1AB4682F00A2DAC3 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
 		70D646FD1AD57E4500E5B7D7 /* UIImageViewAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewAsync.swift; sourceTree = "<group>"; };
+		70D646FF1AD5880700E5B7D7 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
 		70E020521AA21039007968CF /* PosterKit Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PosterKit Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E020571AA21039007968CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70E0205A1AA21039007968CF /* ios_mt_poster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ios_mt_poster.xcdatamodel; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		C0A7D6A5840044BC6B7849B5 /* NetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetData.swift; sourceTree = "<group>"; };
 		C0A7D6E5EE7312A743B48A6A /* googleicon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file.ttf; path = googleicon.ttf; sourceTree = "<group>"; };
 		C0A7D858AB2EA2E3372B09EB /* AddTextPosterItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTextPosterItemController.swift; sourceTree = "<group>"; };
+		C0A7DE13153D7E7640715082 /* FileSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSave.swift; sourceTree = "<group>"; };
 		C0A7DE2B3BD295836151BA36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C0A7DFE0765E655FC6C3D796 /* UIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +197,7 @@
 			children = (
 				702CF69D1AB1347F00474DA2 /* Model.swift */,
 				C0A7D6A5840044BC6B7849B5 /* NetData.swift */,
+				C0A7DE13153D7E7640715082 /* FileSave.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -266,6 +270,7 @@
 		70E020551AA21039007968CF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				70D646FF1AD5880700E5B7D7 /* Playground.playground */,
 				70767D061AC336F9006176B5 /* PosterKit Admin.entitlements */,
 				70F4CE161AB6415900ACB0D0 /* icon2.png */,
 				70E020611AA21039007968CF /* Images.xcassets */,
@@ -548,6 +553,7 @@
 				C0A7D3E959F838F01CE1870A /* AddTextPosterItemController.swift in Sources */,
 				C0A7D06BB18281BF13CFB270 /* NetData.swift in Sources */,
 				C0A7DC232B737D108ACDE53C /* UIHelper.swift in Sources */,
+				C0A7DDAB53C319D476AADF76 /* FileSave.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

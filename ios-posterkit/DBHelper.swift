@@ -240,17 +240,12 @@ class DBHelper: NSObject {
     }
 
 
-    func uploadRequestWithProgress(posterItem: PosterItem!, data: NSData!) {
+    func uploadRequestWithProgress(urlRequest: (URLRequestConvertible, NSData)) {
 
-        var parameters = [
-                "file": NetData(data: data!, mimeType: MimeType.ImagePng, filename: posterItem.name!)
-        ]
-
-
-        let URL = "http://ltg.evl.uic.edu:2596/"
-
-
-        let urlRequest = urlRequestWithComponents(URL, parameters: parameters)
+//        let URL = "http://ltg.evl.uic.edu:2596/"
+//
+//
+//        let urlRequest = urlRequestWithComponents(URL, parameters: parameters)
 
         NSLog("URL REQUEST: \(urlRequest)")
         Alamofire.upload(urlRequest.0, urlRequest.1)
@@ -272,8 +267,7 @@ class DBHelper: NSObject {
 
     // this function creates the required URLRequestConvertible and NSData we need to use Alamofire.upload
     func urlRequestWithComponents(urlString: String, parameters: NSDictionary) -> (URLRequestConvertible, NSData) {
-
-
+        
         // create url request to send
         var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
         mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue

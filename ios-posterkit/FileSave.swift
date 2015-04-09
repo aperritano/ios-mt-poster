@@ -36,7 +36,7 @@ struct FileSave {
         
     }
     
-    static func saveDataToTemporaryDirectory(fileData:NSData, path:String, subdirectory:String?) -> Bool
+    static func saveDataToTemporaryDirectory(fileData:NSData, path:String, subdirectory:String?) -> String?
     {
         
         // Remove unnecessary slash if need
@@ -63,9 +63,10 @@ struct FileSave {
         savePath += newPath
         // Save the file and see if it was successful
         let ok:Bool = NSFileManager.defaultManager().createFileAtPath(savePath,contents:fileData, attributes:nil)
-        
+
+        println("savepath \(savePath)")
         // Return status of file save
-        return ok
+        return savePath
     }
     
     
